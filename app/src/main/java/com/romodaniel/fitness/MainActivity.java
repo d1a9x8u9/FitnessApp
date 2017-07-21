@@ -2,6 +2,7 @@ package com.romodaniel.fitness;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,21 +74,31 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_notes) {
-            // Handle the notes action
-            iv.setImageResource(R.drawable.journal);
-        } else if (id == R.id.nav_tracker) {
-            iv.setImageResource(R.drawable.tracker);
 
-        } else if (id == R.id.nav_profile) {
-            iv.setImageResource(R.drawable.profile);
+        if (id == R.id.nav_profile) {
+//            iv.setImageResource(R.drawable.profile);
 
-        } else if (id == R.id.nav_planner) {
-            iv.setImageResource(R.drawable.calendar);
+       }
+         else if (id == R.id.nav_tracker) {
+//            iv.setImageResource(R.drawable.tracker);
 
         } else if(id == R.id.nav_action){
-            iv.setImageResource(R.drawable.map);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentMain, new MapFragment())
+                    .commit();
+
         }
+
+//            if (id == R.id.nav_notes) {
+
+//                iv.setImageResource(R.drawable.journal);
+//            }
+//        else } else if (id == R.id.nav_planner) {
+//            iv.setImageResource(R.drawable.calendar);
+//
+//        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

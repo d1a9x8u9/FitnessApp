@@ -9,21 +9,21 @@
         <item
             android:id="@+id/nav_action"
             android:icon="@drawable/ic_menu_action"
-            android:title="Action"
+            android:title="Map Action "
             />
-        <item
-            android:id="@+id/nav_notes"
-            android:icon="@drawable/ic_menu_notes"
-            android:title="Journal" />
+        <!--<item-->
+            <!--android:id="@+id/nav_notes"-->
+            <!--android:icon="@drawable/ic_menu_notes"-->
+            <!--android:title="Journal" />-->
         <item
             android:id="@+id/nav_tracker"
             android:icon="@drawable/ic_menu_tracker"
-            android:title="Tracker" />
+            android:title="Cal Tracker" />
 
-        <item
-            android:id="@+id/nav_planner"
-            android:icon="@drawable/ic_menu_planner"
-            android:title="Planner" />
+        <!--<item-->
+            <!--android:id="@+id/nav_planner"-->
+            <!--android:icon="@drawable/ic_menu_planner"-->
+            <!--android:title="Planner" />-->
     </group>
 
     <!--<item android:title="Communicate">-->
