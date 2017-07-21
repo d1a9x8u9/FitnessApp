@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
-public class MapFragment extends Fragment {
+public class ActivityFragment extends Fragment {
     private ImageView startRun;
 
-    public MapFragment() {
+    public ActivityFragment() {
         // Required empty public constructor
     }
 
@@ -21,7 +21,7 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_activity, container, false);
         startRun = (ImageView) view.findViewById(R.id.startRun);
         startRun.setOnClickListener(new View.OnClickListener() {
             @Override
