@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         } else if(id == R.id.nav_action){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contentMain, new MapFragment())
+                    .replace(R.id.contentMain, new ActivityFragment())
                     .commit();
 
         }
