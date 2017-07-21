@@ -76,11 +76,16 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_profile) {
-//            iv.setImageResource(R.drawable.profile);
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentMain, new ProfileFragment())
+                    .commit();
        }
          else if (id == R.id.nav_tracker) {
-//            iv.setImageResource(R.drawable.tracker);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentMain, new TrackerFragment())
+                    .commit();
 
         } else if(id == R.id.nav_action){
             getSupportFragmentManager()
@@ -90,6 +95,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+        //if we have time to do
 //            if (id == R.id.nav_notes) {
 
 //                iv.setImageResource(R.drawable.journal);

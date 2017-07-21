@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/startRun"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/start"
@@ -136,6 +136,6 @@
                 android:layout_gravity="center"
                 />
         </LinearLayout>
-
     </LinearLayout>
+
 </LinearLayout>

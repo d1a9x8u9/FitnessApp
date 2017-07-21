@@ -10,7 +10,7 @@
     tools:showIn="@layout/app_bar_main"
     android:weightSum="1">
 
-
+<!--this is our home page-->
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
