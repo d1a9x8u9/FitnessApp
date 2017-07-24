@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Fitness</string>
     <!--TODO insert API KEY here-->
-    <string name="google_maps_api_key">API Key</string>
+    <string name="google_maps_api_key">AIzaSyDxLwUxfo_6jA6mB3DNfz3uQqsSnRfVtgM</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
