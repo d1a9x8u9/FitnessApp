@@ -3,6 +3,7 @@ package com.romodaniel.fitness;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.transition.Scene;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ public class ActivityFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap map;
     private View view;
 
+
+
     public ActivityFragment() {
         // Required empty public constructor
     }
@@ -32,6 +35,7 @@ public class ActivityFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_activity, container, false);
         view.findViewById(R.id.map).setVisibility(View.INVISIBLE);
+
         startRun = (ImageView) view.findViewById(R.id.startRun);
         mapView = (MapView) view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);

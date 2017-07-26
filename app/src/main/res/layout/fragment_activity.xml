@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/master_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -144,8 +145,13 @@
     </LinearLayout>
 
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/map"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <include
+            layout="@layout/google_maps_scene" />
+    </FrameLayout>
 
-    <include android:id="@+id/map"
-        layout="@layout/google_maps_scene" />
 
 </LinearLayout>
