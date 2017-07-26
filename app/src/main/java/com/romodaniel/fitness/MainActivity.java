@@ -1,5 +1,7 @@
 package com.romodaniel.fitness;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 
@@ -12,10 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.romodaniel.fitness.data.DBHelper;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageView iv;
+    private SQLiteDatabase db;
+    private Cursor cursor;
+    private DBHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,10 +110,26 @@ public class MainActivity extends AppCompatActivity
 //            iv.setImageResource(R.drawable.calendar);
 //
 //        }
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (db != null)
+            db.close();
+        if (cursor != null)
+            cursor.close();
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        helper = new DBHelper(this);
+        db = helper.getWritableDatabase();
+//        cursor = getAllItems(db);
+    }
+
 }
