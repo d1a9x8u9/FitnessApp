@@ -16,7 +16,7 @@ public class Contact
     float cw;
     float gw;
     int age;
-    public Contact(String name, String uname, String password, int pn, float cw, float gw, int age) {
+    /*public Contact(String name, String uname, String password, int pn, float cw, float gw, int age) {
         // this.id = id;
         this.name = name;
         this.uname = uname;
@@ -25,7 +25,9 @@ public class Contact
         this.cw = cw;
         this.gw = gw;
         this.age = age;
-    }
+    }*/
+
+    public Contact(){}
 
     /*public void setId(int id) {
         this.id = id;
