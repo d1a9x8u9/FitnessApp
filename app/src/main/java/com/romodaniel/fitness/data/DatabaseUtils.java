@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static com.romodaniel.fitness.data.Contract.TABLE_RUNS.TABLE_NAME;
+import static com.romodaniel.fitness.data.Contract.TABLE_RUNS.*;
 
 /**
  * Created by drdan on 7/26/2017.
@@ -38,7 +38,7 @@ public class DatabaseUtils {
 
 
 //    cursor = DatabaseUtils.getAll(db);
-//                cursor.moveToFirst();
+//              
 //
 //                while(cursor.moveToNext()){
 //        int id = cursor.getInt(0);
