@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if(id == R.id.nav_action){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contentMain, new ActivityFragment())
+                    .replace(R.id.contentMain, new GoogleMapsFragment())
                     .commit();
 
         }
