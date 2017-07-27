@@ -22,5 +22,6 @@
     <string name="distance">Distance</string>
     <string name="speed">Speed</string>
     <string name="calories">Calories</string>
+    <string name="last_run">Last Run Data</string>
 
 </resources>
