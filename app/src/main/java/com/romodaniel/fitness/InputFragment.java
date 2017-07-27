@@ -81,7 +81,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("0");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("0");
             }
         });
@@ -93,7 +93,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("1");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("1");
             }
         });
@@ -105,7 +105,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("2");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("2");
             }
         });
@@ -117,7 +117,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("3");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("3");
             }
         });
@@ -129,7 +129,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("4");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("4");
             }
         });
@@ -141,7 +141,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("5");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("5");
             }
         });
@@ -153,7 +153,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("6");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("6");
             }
         });
@@ -165,7 +165,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("7");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("7");
             }
         });
@@ -177,7 +177,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("8");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("8");
             }
         });
@@ -189,7 +189,7 @@ public class InputFragment extends Fragment {
 
                 if(checkZero(numScreen))
                     numScreen.setText("9");
-                else
+                else if(checkDigit(numScreen))
                     numScreen.append("9");
             }
         });
@@ -225,6 +225,16 @@ public class InputFragment extends Fragment {
     public boolean checkZero(TextView numScreen)
     {
         if(numScreen.getText().toString().equals("0"))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public boolean checkDigit(TextView numScreen)
+    {
+        if(numScreen.getText().toString().length() < 10)
         {
             return true;
         }
