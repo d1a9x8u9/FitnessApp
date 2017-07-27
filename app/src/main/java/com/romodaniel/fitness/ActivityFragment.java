@@ -2,6 +2,7 @@ package com.romodaniel.fitness;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,14 @@ public class ActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
         startRun = (ImageView) view.findViewById(R.id.startRun);
         startRun.setOnClickListener(new View.OnClickListener() {
+            // once the image is clicked get the google maps fragment where the user can start run
             @Override
             public void onClick(View v) {
                 //transition to map tracer
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction()
+                        .replace(R.id.fragment_activity, new GoogleMapsFragment())
+                        .commit();
             }
         });
 
