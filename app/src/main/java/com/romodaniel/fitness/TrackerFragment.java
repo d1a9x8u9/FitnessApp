@@ -1,6 +1,5 @@
 package com.romodaniel.fitness;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,7 +21,7 @@ public class TrackerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.cal_tracker, container, false);
+        return inflater.inflate(R.layout.fragment_tracker, container, false);
     }
 
 

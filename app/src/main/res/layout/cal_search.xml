@@ -4,31 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search Calory"
-        android:textSize="18dp"
-        android:textColor="#E3F2FD"
-        android:background="#2196F3"
-        android:gravity="center"
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" back"
+            android:textSize="18dp"
+            android:textColor="#E3F2FD"
+            android:background="#2196F3"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Search Calory"
+            android:textSize="18dp"
+            android:textColor="#E3F2FD"
+            android:background="#2196F3"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="        "
+            android:textSize="18dp"
+            android:textColor="#E3F2FD"
+            android:background="#2196F3"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <EditText
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="right"
-            android:textSize="50dp"
             android:hint="food"
-            />
+            android:textSize="43dp" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="search"/>
+            android:text="search" />
 
     </LinearLayout>
 
