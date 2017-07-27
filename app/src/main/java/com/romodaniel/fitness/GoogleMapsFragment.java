@@ -1,5 +1,7 @@
 package com.romodaniel.fitness;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -7,10 +9,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 
 import java.util.ArrayList;
@@ -28,7 +35,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     private long startTime;
     private long timeOnPause;
     private long timeOnStart;
-//    private ArrayList<LatitudeLongitude> coordinates;
+    private ArrayList<LatLng> coordinates;
     private GoogleMap mGoogleMap;
     private Handler mHandler;
     private LocationManager mLocationManager;
@@ -52,8 +59,27 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
     };
 
-    public GoogleMapsFragment() {
-        // Required empty public constructor
+    // actions to take when location is enabled
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            }, 1);
+        } else if (mGoogleMap != null) {
+            mGoogleMap.setMyLocationEnabled(true);
+
+            // location needs to be updated every 5 seconds
+            if (mLocationManager != null) {
+                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 0.0f, this);
+
+                Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                if (location != null) {
+                    LatLng lastKnownLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastKnownLatLng, 15.0f));
+                }
+            }
+        }
     }
 
     @Override
