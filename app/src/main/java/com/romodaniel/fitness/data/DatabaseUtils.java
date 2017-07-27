@@ -37,6 +37,17 @@ public class DatabaseUtils {
     }
 
 
+//    cursor = DatabaseUtils.getAll(db);
+//                cursor.moveToFirst();
+//
+//                while(cursor.moveToNext()){
+//        int id = cursor.getInt(0);
+//        double miles = cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_MILES));
+//
+//    }
+
+
+
 
     public static void deleteAll(SQLiteDatabase db) {
         db.delete(TABLE_NAME, null, null);
