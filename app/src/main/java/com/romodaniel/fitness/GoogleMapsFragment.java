@@ -2,6 +2,7 @@ package com.romodaniel.fitness;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,13 +13,17 @@ import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.SphericalUtil;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -51,9 +56,9 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
             elapsedTime = SystemClock.uptimeMillis() - timeOnStart;
             int elapse = (int) (timeOnPause + elapsedTime) / 1000;
             int minutes = elapse / 60;
-            int secs = elapse % 60;
+            int seconds = elapse % 60;
 
-            mActiveTimeView.setText(String.format(Locale.US, "02d:%02d", minutes, secs));
+            mActiveTimeView.setText(String.format(Locale.US, "02d:%02d", minutes, seconds));
             mHandler.postDelayed(this, REFRESH_RATE);
         }
 
@@ -82,6 +87,46 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         }
     }
 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_google_maps, container, false);
+    }
+
+    // trace the user's run
+    @Override
+    public void onLocationChanged(Location location) {
+        if (onStart) {
+            LatLng coordinate = new LatLng(location.getLatitude(), location.getLongitude());
+            coordinates.add(coordinate);
+
+            // to avoid redrawing the same coordinates
+            mGoogleMap.clear();
+
+            // trace the map using the coordinates collected as the user ran
+            mGoogleMap.addPolyline(new PolylineOptions().addAll(coordinates).color(Color.BLUE).width(5.0f));
+
+            // update the map to the new position
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
+
+            int size = coordinates.size();
+            if (size > 1) {
+                LatLng previous = coordinates.get(size - 2);
+                totalDistance += SphericalUtil.computeDistanceBetween(previous, coordinate);
+
+                // convert the distance from meters to miles
+                double displayTotalDistance = totalDistance * 0.000621371;
+                mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", displayTotalDistance));
+
+                int activeTime = (int) (timeOnPause + elapsedTime) / 1000 / 60;
+                double averagePace = activeTime / displayTotalDistance;
+                int minutes = (int) averagePace;
+                int seconds = (int) (averagePace % 1 * 60);
+
+                mAveragePaceView.setText(String.format(Locale.US, "%d:%02d/mi", minutes, seconds));
+
+            }
+        }
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -97,10 +142,8 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
 
-    }
+
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
