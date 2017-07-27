@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
          else if (id == R.id.nav_tracker) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contentMain, new InputFragment())
+                    .replace(R.id.contentMain, new TrackerFragment())
                     .commit();
 
         } else if(id == R.id.nav_action){
