@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Fitness</string>
+
     <!--TODO insert API KEY here-->
     <string name="google_maps_api_key">AIzaSyDxLwUxfo_6jA6mB3DNfz3uQqsSnRfVtgM</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -23,5 +25,17 @@
     <string name="speed">Speed</string>
     <string name="calories">Calories</string>
     <string name="last_run">Last Run Data</string>
+
+    <string name="header_active_time">00:00</string>
+    <string name="header_average_pace">0:00/mi</string>
+    <string name="header_burnt_calories">0 cal</string>
+    <string name="header_counted_steps">0 steps</string>
+    <string name="header_email">email@example.com</string>
+    <string name="header_full_name">Full Name</string>
+    <string name="header_total_miles">0 mi</string>
+
+    <string name="action_start">Start</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_stop">Stop</string>
 
 </resources>

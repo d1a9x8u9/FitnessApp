@@ -3,6 +3,7 @@ package com.romodaniel.fitness.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import android.util.Log;
 
 /**
@@ -12,6 +13,7 @@ import android.util.Log;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
+
     private static final String DATABASE_NAME = "fitness.db";
     private static final String TAG = "dbhelper";
 
@@ -34,14 +36,22 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d(TAG, "create Table sql: " +queryString);
         db.execSQL(queryString);
 
+        String queryString2 = "CREATE TABLE " + Contract.TABLE_USER.TABLE_NAME + " (" +
+                Contract.TABLE_USER.COLUMN_NAME_GENDER + " TEXT," +
+                Contract.TABLE_USER.COLUMN_NAME_AGE + " INTEGER," +
+                Contract.TABLE_USER.COLUMN_NAME_WEIGHT + " INTEGER);";
 
 
+        Log.d(TAG, "create Table sql: " +queryString);
+        db.execSQL(queryString);
 
 
     }
 
-    @Override
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        db.execSQL("drop table " + Contract.TABLE_INFO.TABLE_NAME + " if exists;");
 
     }
+
 }

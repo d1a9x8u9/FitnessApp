@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.transition.Scene;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,19 @@ public class ActivityFragment extends Fragment implements OnMapReadyCallback {
 
 
         startRun.setOnClickListener(new View.OnClickListener() {
+            // once the image is clicked get the google maps fragment where the user can start run
             @Override
             public void onClick(View v) {
                 //transition to map tracer
                 view.findViewById(R.id.start).setVisibility(View.GONE);
                 view.findViewById(R.id.map).setVisibility(View.VISIBLE);
 
+
+
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction()
+                        .replace(R.id.fragment_activity, new GoogleMapsFragment())
+                        .commit();
 
             }
         });
