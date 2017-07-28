@@ -42,8 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 Contract.TABLE_USER.COLUMN_NAME_WEIGHT + " INTEGER);";
 
 
-        Log.d(TAG, "create Table sql: " +queryString);
-        db.execSQL(queryString);
+        Log.d(TAG, "create Table sql: " +queryString2);
+        db.execSQL(queryString2);
 
 
     }

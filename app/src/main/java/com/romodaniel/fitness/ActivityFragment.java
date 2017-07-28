@@ -2,8 +2,6 @@ package com.romodaniel.fitness;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.transition.Scene;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -16,10 +14,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 
-public class ActivityFragment extends Fragment implements OnMapReadyCallback {
+public class ActivityFragment extends Fragment {
     private ImageView startRun;
-    private MapView mapView;
-    private GoogleMap map;
     private View view;
 
 
@@ -35,11 +31,9 @@ public class ActivityFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_activity, container, false);
-        view.findViewById(R.id.map).setVisibility(View.INVISIBLE);
 
         startRun = (ImageView) view.findViewById(R.id.startRun);
-        mapView = (MapView) view.findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
+
 
 
 
@@ -49,7 +43,6 @@ public class ActivityFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View v) {
                 //transition to map tracer
                 view.findViewById(R.id.start).setVisibility(View.GONE);
-                view.findViewById(R.id.map).setVisibility(View.VISIBLE);
 
 
 
@@ -64,41 +57,4 @@ public class ActivityFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-
-
-        //map.addMarker(new MarkerOptions().position(l));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
 }
