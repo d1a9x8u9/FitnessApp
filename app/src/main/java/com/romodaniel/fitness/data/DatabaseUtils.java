@@ -38,7 +38,7 @@ public class DatabaseUtils {
 
 
 //    cursor = DatabaseUtils.getAll(db);
-//              
+//
 //
 //                while(cursor.moveToNext()){
 //        int id = cursor.getInt(0);
