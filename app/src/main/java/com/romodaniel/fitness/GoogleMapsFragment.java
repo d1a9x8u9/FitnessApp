@@ -255,4 +255,14 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         });
 
     }
+
+    public double calulateNetCalories(double miles, double timeInHours, int lbs){
+        double pace = miles/timeInHours;
+        if(pace>5){
+            return (.63 * lbs) * miles;
+        }else{
+            return (.3 * lbs) * miles;
+        }
+
+    }
 }

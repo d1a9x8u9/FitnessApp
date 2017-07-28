@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.romodaniel.fitness.Contact;
+
 import static com.romodaniel.fitness.data.Contract.TABLE_RUNS.*;
 
 /**
@@ -35,6 +37,7 @@ public class DatabaseUtils {
         return db.insert(TABLE_NAME, null,cv);
 
     }
+
 
 
 //    cursor = DatabaseUtils.getAll(db);

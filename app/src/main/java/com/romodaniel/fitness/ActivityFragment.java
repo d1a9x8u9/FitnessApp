@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-
 
 public class ActivityFragment extends Fragment {
     private ImageView startRun;
@@ -25,7 +21,6 @@ public class ActivityFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,16 +29,12 @@ public class ActivityFragment extends Fragment {
 
         startRun = (ImageView) view.findViewById(R.id.startRun);
 
-
-
-
         startRun.setOnClickListener(new View.OnClickListener() {
             // once the image is clicked get the google maps fragment where the user can start run
             @Override
             public void onClick(View v) {
                 //transition to map tracer
                 view.findViewById(R.id.start).setVisibility(View.GONE);
-
 
 
                 FragmentManager fm = getFragmentManager();
