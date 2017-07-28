@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.romodaniel.fitness.Contact;
 
 import static com.romodaniel.fitness.data.Contract.TABLE_RUNS.*;
 
@@ -29,11 +28,10 @@ public class DatabaseUtils {
 
     public static long InsertToDb(SQLiteDatabase db, Runs r){
         ContentValues cv = new ContentValues();
-        cv.put(Contract.TABLE_RUNS.COLUMN_NAME_SECONDS, r.getSeconds());
-        cv.put(Contract.TABLE_RUNS.COLUMN_NAME_MINUTES, r.getMinutes());
-        cv.put(Contract.TABLE_RUNS.COLUMN_NAME_STEPS, r.getSteps());
+        cv.put(Contract.TABLE_RUNS.COLUMN_NAME_TIME, r.getTime());
         cv.put(Contract.TABLE_RUNS.COLUMN_NAME_MILES, r.getMiles());
         cv.put(Contract.TABLE_RUNS.COLUMN_NAME_CAL, r.getCal());
+        cv.put(Contract.TABLE_RUNS.COLUMN_NAME_STEPS, r.getSteps());
         return db.insert(TABLE_NAME, null,cv);
 
     }
@@ -48,8 +46,6 @@ public class DatabaseUtils {
 //        double miles = cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_MILES));
 //
 //    }
-
-
 
 
     public static void deleteAll(SQLiteDatabase db) {

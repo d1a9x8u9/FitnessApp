@@ -26,8 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String queryString = "CREATE TABLE " + Contract.TABLE_RUNS.TABLE_NAME + " ("+
                 Contract.TABLE_RUNS._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Contract.TABLE_RUNS.COLUMN_NAME_MINUTES + " int, " +
-                Contract.TABLE_RUNS.COLUMN_NAME_SECONDS + " int, " +
+                Contract.TABLE_RUNS.COLUMN_NAME_TIME + " int, " +
                 Contract.TABLE_RUNS.COLUMN_NAME_MILES + " double, " +
                 Contract.TABLE_RUNS.COLUMN_NAME_CAL + " int, " +
                 Contract.TABLE_RUNS.COLUMN_NAME_STEPS + " int" +

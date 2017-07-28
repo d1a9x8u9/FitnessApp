@@ -3,6 +3,8 @@ package com.romodaniel.fitness;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -32,6 +34,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
+import com.romodaniel.fitness.data.DBHelper;
+import com.romodaniel.fitness.data.DatabaseUtils;
+import com.romodaniel.fitness.data.Runs;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -55,6 +60,12 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     private TextView mActiveTimeView;
     private TextView mTotalDistanceView;
     private TextView mAveragePaceView;
+
+    private DatabaseUtils dbUtls;
+    private SQLiteDatabase db;
+
+    private Cursor c;
+    double TotalDistanceMiles;
 
     private Runnable updateTimeThread = new Runnable() {
 
@@ -96,6 +107,9 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        DBHelper dbhelper = new DBHelper(this.getActivity());
+
+        db = dbhelper.getWritableDatabase();
         return inflater.inflate(R.layout.fragment_google_maps, container, false);
     }
 
@@ -122,11 +136,11 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 totalDistance += SphericalUtil.computeDistanceBetween(previous, coordinate);
 
                 // convert the distance from meters to miles
-                double displayTotalDistance = totalDistance * 0.000621371;
-                mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", displayTotalDistance));
+                TotalDistanceMiles = totalDistance * 0.000621371;
+                mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
 
                 int activeTime = (int) (timeOnPause + elapsedTime) / 1000 / 60;
-                double averagePace = activeTime / displayTotalDistance;
+                double averagePace = activeTime / TotalDistanceMiles;
                 int minutes = (int) averagePace;
                 int seconds = (int) (averagePace % 1 * 60);
 
@@ -242,6 +256,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 int activeTime = (int) (timeOnPause + elapsedTime) / 1000;
                 int totalTime = (int) (SystemClock.uptimeMillis() - startTime) / 1000;
 
+                Log.d("totalTime", ""+activeTime);
                 int minutes = activeTime / 60;
                 int seconds = totalTime % 60;
 
@@ -251,12 +266,20 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 seconds = totalTime % 60;
 
                 Log.d(TAG, String.format(Locale.US, "Total time: %02d:%02d", minutes, seconds));
+
+                String tMiles= String.format(Locale.US, "%.2f", TotalDistanceMiles);
+                double miles =  Double.parseDouble(tMiles);
+
+                Runs run = new Runs(calulateNetCalories(TotalDistanceMiles,activeTime,125), miles,0,activeTime);
+                DatabaseUtils.InsertToDb(db,run);
+
             }
         });
 
     }
 
-    public double calulateNetCalories(double miles, double timeInHours, int lbs){
+    public double calulateNetCalories(double miles, int time, int lbs){
+        double timeInHours = time /3600;
         double pace = miles/timeInHours;
         if(pace>5){
             return (.63 * lbs) * miles;

@@ -5,26 +5,24 @@ package com.romodaniel.fitness.data;
  */
 
 public class Runs {
-    private int cal;
+    private double cal;
     private double miles;
     private int steps;
-    private int minutes;
-    private int seconds;
+    private int time;
 
 
-    public Runs(int cal, double miles, int steps, int minutes, int seconds) {
+    public Runs(double cal, double miles, int steps, int time) {
         this.cal = cal;
         this.miles = miles;
         this.steps = steps;
-        this.minutes = minutes;
-        this.seconds = seconds;
+        this.time = time;
     }
 
-    public int getCal() {
+    public double getCal() {
         return cal;
     }
 
-    public void setCal(int cal) {
+    public void setCal(double cal) {
         this.cal = cal;
     }
 
@@ -44,19 +42,11 @@ public class Runs {
         this.steps = steps;
     }
 
-    public int getMinutes() {
-        return minutes;
+    public int getTime() {
+        return time;
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
-
-    public int getSeconds() {
-        return seconds;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
+    public void setTime(int time) {
+        this.time = time;
     }
 }

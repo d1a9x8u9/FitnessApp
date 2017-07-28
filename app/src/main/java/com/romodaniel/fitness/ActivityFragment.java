@@ -1,18 +1,34 @@
 package com.romodaniel.fitness;
 
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.BaseTransientBottomBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.romodaniel.fitness.data.Contract;
+import com.romodaniel.fitness.data.DBHelper;
+import com.romodaniel.fitness.data.DatabaseUtils;
+
+import java.util.Locale;
 
 
 public class ActivityFragment extends Fragment {
     private ImageView startRun;
+    private TextView totalRuns;
+    private TextView totalMiles;
+    private TextView totalTime;
+    private TextView totalCal;
     private View view;
+    private SQLiteDatabase db;
 
 
 
@@ -28,6 +44,38 @@ public class ActivityFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_activity, container, false);
 
         startRun = (ImageView) view.findViewById(R.id.startRun);
+        totalRuns =(TextView) view.findViewById(R.id.total_runs);
+        totalCal = (TextView) view.findViewById(R.id.total_cal);
+        totalMiles =(TextView) view.findViewById(R.id.total_miles);
+        totalTime = (TextView) view.findViewById(R.id.total_time);
+
+
+        DBHelper dbhelper = new DBHelper(this.getActivity());
+        db = dbhelper.getWritableDatabase();
+        Cursor cursor = DatabaseUtils.getAll(db);
+
+        double miles=0;
+        double calories =0;
+        int sec =0;
+
+        while(cursor.moveToNext()){
+            miles += cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_MILES));
+            calories += cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_CAL));
+            sec += cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_TIME));
+        }
+
+
+        totalMiles.setText("" + miles);
+        totalCal.setText("" + calories);
+        totalTime.setText("" + sec);
+
+
+        if(cursor.moveToLast()){
+            totalRuns.setText(""+cursor.getInt(0));
+        }else {
+            totalRuns.setText("0");
+        }
+
 
         startRun.setOnClickListener(new View.OnClickListener() {
             // once the image is clicked get the google maps fragment where the user can start run
@@ -47,5 +95,6 @@ public class ActivityFragment extends Fragment {
 
         return view;
     }
+
 
 }
