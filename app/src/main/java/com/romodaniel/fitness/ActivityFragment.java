@@ -67,8 +67,8 @@ public class ActivityFragment extends Fragment {
 
 
         totalMiles.setText("" + miles);
-        totalCal.setText("" + calories);
-        totalTime.setText("" + sec);
+        totalCal.setText(String.format(Locale.US, "%.2f",calories));
+        totalTime.setText(String.format(Locale.US, "%02d:%02d:%02d", sec/36000, (sec/60)%60, sec %60));
 
 
         //total run is the id of the last run entered since user cant delete runs
