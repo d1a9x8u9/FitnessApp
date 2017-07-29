@@ -11,15 +11,24 @@
         android:orientation="horizontal">
 
         <Button
+<<<<<<< Updated upstream
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
+=======
+            android:id="@+id/left"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:background="#2196F3"
+            android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
             android:text="&lt;" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="348dp"
             android:layout_height="match_parent"
+<<<<<<< Updated upstream
             android:textColor="#000000"
             android:background="#FFFFFF"
             android:gravity="center"
@@ -30,11 +39,25 @@
         <Button
             android:layout_width="32dp"
             android:background="#FFFFFF"
+=======
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="32dp"
+            android:background="#2196F3"
+            android:textColor="#FFFFFF"
+>>>>>>> Stashed changes
             android:layout_height="wrap_content"
             android:text="&gt;" />
 
     </LinearLayout>
 
+<<<<<<< Updated upstream
 
     <TextView
         android:id="@+id/breakfastTitle"
@@ -115,6 +138,46 @@
         android:layout_marginTop="15dp"
         android:gravity="left"
         android:text="Total Calories:" />
+=======
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="153dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:layout_weight="0.49" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:layout_weight="0.16" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:textSize="40dp"
+        android:textColor="#E3F2FD"
+        android:text="Add Food"
+        android:layout_weight="0.39" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="130dp"-->
+        <!--android:background="#000000"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="20dp"-->
+        <!--android:text="TOTAL CALORIES"-->
+        <!--android:textColor="#FFFFFF" />-->
+>>>>>>> Stashed changes
 
 
 </LinearLayout>
