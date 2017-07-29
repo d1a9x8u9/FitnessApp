@@ -7,11 +7,11 @@ package com.romodaniel.fitness.data;
 public class Runs {
     private double cal;
     private double miles;
-    private int steps;
+    private long steps;
     private int time;
 
 
-    public Runs(double cal, double miles, int steps, int time) {
+    public Runs(double cal, double miles, long steps, int time) {
         this.cal = cal;
         this.miles = miles;
         this.steps = steps;
@@ -34,11 +34,11 @@ public class Runs {
         this.miles = miles;
     }
 
-    public int getSteps() {
+    public long getSteps() {
         return steps;
     }
 
-    public void setSteps(int steps) {
+    public void setSteps(long steps) {
         this.steps = steps;
     }
 

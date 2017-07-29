@@ -66,6 +66,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
     private SQLiteDatabase db;
     double TotalDistanceMiles;
+    private long steps;
 
     private Runnable updateTimeThread = new Runnable() {
 
@@ -154,8 +155,10 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
                 mAveragePaceView.setText(String.format(Locale.US, "%d:%02d/mi", minutes, seconds));
                 mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
+                TotalDistanceMiles = Double.parseDouble(String.format(Locale.US, "%.2f", TotalDistanceMiles));
                 //// TODO: 7/28/2017 get height from user
-                mCountedSteps.setText(String.format(Locale.US, "%.2f steps",calculateSteps(66)*TotalDistanceMiles));
+                mCountedSteps.setText(String.format(Locale.US, "%d steps",Math.round(calculateSteps(66)*TotalDistanceMiles)));
+                steps= Math.round(calculateSteps(66)*TotalDistanceMiles);
                 //// TODO: 7/28/2017 get lbs from user
                 mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calulateNetCalories(TotalDistanceMiles,activeTime,125)));
 
@@ -281,7 +284,8 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 Log.d(TAG, String.format(Locale.US, "Total time: %02d:%02d", minutes, seconds));
 
                 //// TODO: 7/28/2017 get lbs from user
-                Runs run = new Runs(Math.round(calulateNetCalories(TotalDistanceMiles,activeTime,125)), Math.round(TotalDistanceMiles),0,activeTime);
+                double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calulateNetCalories(TotalDistanceMiles,activeTime,125)));
+                Runs run = new Runs(cal, TotalDistanceMiles,steps,activeTime);
                 DatabaseUtils.InsertToDb(db,run);
 
             }
