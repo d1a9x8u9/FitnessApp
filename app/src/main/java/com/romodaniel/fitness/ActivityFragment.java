@@ -90,6 +90,7 @@ public class ActivityFragment extends Fragment {
                 FragmentManager fm = getFragmentManager();
                 fm.beginTransaction()
                         .replace(R.id.fragment_activity, new GoogleMapsFragment())
+                        .addToBackStack("tag")
                         .commit();
 
             }

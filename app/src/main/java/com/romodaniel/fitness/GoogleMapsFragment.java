@@ -3,7 +3,6 @@ package com.romodaniel.fitness;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
@@ -18,8 +17,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.test.suitebuilder.TestMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +116,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         mTotalDistanceView = (TextView) view.findViewById(R.id.total_miles);
         mCountedSteps = (TextView) view.findViewById(R.id.counted_steps);
         mBurntCalories = (TextView) view.findViewById(R.id.burnt_calories);
+
         return view;
     }
 
@@ -227,6 +227,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         final Button startPauseButton = (Button) getActivity().findViewById(R.id.start_pause_button);
         final Button stopButton = (Button) getActivity().findViewById(R.id.stop_button);
 
+
         // start button and the pause button
         startPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,8 +306,8 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     }
 
     //calculate steps per miles base on height
-    public double calculateSteps(int height){
-        return 5280/((height*.4013)/12);
+    public long calculateSteps(int height){
+        return Math.round(5280/((height*.4013)/12));
 
     }
 }
