@@ -160,7 +160,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 mCountedSteps.setText(String.format(Locale.US, "%d steps",Math.round(calculateSteps(66)*TotalDistanceMiles)));
                 steps= Math.round(calculateSteps(66)*TotalDistanceMiles);
                 //// TODO: 7/28/2017 get lbs from user
-                mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calulateNetCalories(TotalDistanceMiles,activeTime,125)));
+                mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calculateNetCalories(TotalDistanceMiles,activeTime,125)));
 
 
 
@@ -284,7 +284,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 Log.d(TAG, String.format(Locale.US, "Total time: %02d:%02d", minutes, seconds));
 
                 //// TODO: 7/28/2017 get lbs from user
-                double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calulateNetCalories(TotalDistanceMiles,activeTime,125)));
+                double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calculateNetCalories(TotalDistanceMiles,activeTime,125)));
                 Runs run = new Runs(cal, TotalDistanceMiles,steps,activeTime);
                 DatabaseUtils.InsertToDb(db,run);
 
@@ -293,7 +293,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
     }
 
-    public double calulateNetCalories(double miles, int time, int lbs){
+    public double calculateNetCalories(double miles, int time, int lbs){
         double timeInHours = time /3600;
         double pace = miles/timeInHours;
         if(pace>5){
