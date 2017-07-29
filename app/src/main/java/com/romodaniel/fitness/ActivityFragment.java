@@ -58,6 +58,7 @@ public class ActivityFragment extends Fragment {
         double calories =0;
         int sec =0;
 
+        //go in every entry add it to the last
         while(cursor.moveToNext()){
             miles += cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_MILES));
             calories += cursor.getDouble(cursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_CAL));
@@ -70,6 +71,7 @@ public class ActivityFragment extends Fragment {
         totalTime.setText("" + sec);
 
 
+        //total run is the id of the last run entered since user cant delete runs
         if(cursor.moveToLast()){
             totalRuns.setText(""+cursor.getInt(0));
         }else {
