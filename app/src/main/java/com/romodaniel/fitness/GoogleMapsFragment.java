@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.test.suitebuilder.TestMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,10 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     private TextView mActiveTimeView;
     private TextView mTotalDistanceView;
     private TextView mAveragePaceView;
+    private TextView mCountedSteps;
+    private TextView mBurntCalories;
 
-    private DatabaseUtils dbUtls;
     private SQLiteDatabase db;
-
-    private Cursor c;
     double TotalDistanceMiles;
 
     private Runnable updateTimeThread = new Runnable() {
@@ -107,10 +107,16 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_google_maps, container, false);
         DBHelper dbhelper = new DBHelper(this.getActivity());
-
         db = dbhelper.getWritableDatabase();
-        return inflater.inflate(R.layout.fragment_google_maps, container, false);
+
+        mActiveTimeView = (TextView) view.findViewById(R.id.active_time);
+        mAveragePaceView = (TextView) view.findViewById(R.id.average_pace);
+        mTotalDistanceView = (TextView) view.findViewById(R.id.total_miles);
+        mCountedSteps = (TextView) view.findViewById(R.id.counted_steps);
+        mBurntCalories = (TextView) view.findViewById(R.id.burnt_calories);
+        return view;
     }
 
     // trace the user's run
@@ -137,7 +143,9 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
                 // convert the distance from meters to miles
                 TotalDistanceMiles = totalDistance * 0.000621371;
-                mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
+
+                Log.d("totalMiles",String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
+                Log.d("totalMiles", "d: "+ TotalDistanceMiles);
 
                 int activeTime = (int) (timeOnPause + elapsedTime) / 1000 / 60;
                 double averagePace = activeTime / TotalDistanceMiles;
@@ -145,6 +153,13 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 int seconds = (int) (averagePace % 1 * 60);
 
                 mAveragePaceView.setText(String.format(Locale.US, "%d:%02d/mi", minutes, seconds));
+                mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
+                //// TODO: 7/28/2017 get height from user
+                mCountedSteps.setText(String.format(Locale.US, "%.2f steps",calculateSteps(66)*TotalDistanceMiles));
+                //// TODO: 7/28/2017 get lbs from user
+                mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calulateNetCalories(TotalDistanceMiles,activeTime,125)));
+
+
 
             }
         }
@@ -204,9 +219,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         mLocationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view)).getMapAsync(this);
 
-        mActiveTimeView = (TextView) getActivity().findViewById(R.id.active_time);
-        mAveragePaceView = (TextView) getActivity().findViewById(R.id.average_pace);
-        mTotalDistanceView = (TextView) getActivity().findViewById(R.id.total_miles);
+
 
         final Button startPauseButton = (Button) getActivity().findViewById(R.id.start_pause_button);
         final Button stopButton = (Button) getActivity().findViewById(R.id.stop_button);
@@ -267,10 +280,8 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
                 Log.d(TAG, String.format(Locale.US, "Total time: %02d:%02d", minutes, seconds));
 
-                String tMiles= String.format(Locale.US, "%.2f", TotalDistanceMiles);
-                double miles =  Double.parseDouble(tMiles);
-
-                Runs run = new Runs(calulateNetCalories(TotalDistanceMiles,activeTime,125), miles,0,activeTime);
+                //// TODO: 7/28/2017 get lbs from user
+                Runs run = new Runs(Math.round(calulateNetCalories(TotalDistanceMiles,activeTime,125)), Math.round(TotalDistanceMiles),0,activeTime);
                 DatabaseUtils.InsertToDb(db,run);
 
             }
@@ -286,6 +297,12 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         }else{
             return (.3 * lbs) * miles;
         }
+
+    }
+
+    //calculate steps per miles base on height
+    public double calculateSteps(int height){
+        return 5280/((height*.4013)/12);
 
     }
 }
