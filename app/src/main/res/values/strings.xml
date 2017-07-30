@@ -17,18 +17,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="track_blank_fragment">Track fragment</string>
     <string name="profile_blank_fragment">profile fragment</string>
-<<<<<<< Updated upstream
-
-    <string name="dinnerTitle">DINNER</string>
-    <string name="lunchTitle">LUNCH</string>
-    <string name="breakfastTitle">BREAKFAST</string>
 
     <string-array name="cdates"></string-array>
-=======
-    <string name="breakfastTitle">BREAKFAST</string>
-    <string name="lunchTitle">LUNCH</string>
-    <string name="dinnerTitle">DINNER</string>
-    <string name="snackTitle">SNACK</string>
 
->>>>>>> Stashed changes
 </resources>

@@ -1,10 +1,13 @@
 package com.romodaniel.fitness;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.romodaniel.fitness.Utilities.FoodItemAdapter;
 import com.romodaniel.fitness.Utilities.FoodItems;
@@ -31,7 +35,6 @@ import java.util.ArrayList;
 
 public class SearchFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    TextView numScreen, addButton;
     Button search, done;
     EditText q;
     String query;
@@ -53,11 +56,13 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         q = (EditText) view.findViewById(R.id.search);
         fooditemsrv = (RecyclerView) view.findViewById(R.id.fooditemrv);
 
-        fooditemsrv.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fooditemsrv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         search.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+                // get edit text and use it to search
                 query= q.getText().toString();
                 Log.d(TAG, "q : " + query);
                 FetchSearchedItem fetch = new FetchSearchedItem();
@@ -69,6 +74,8 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         done.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+                // Go back to TrackerFragment
                 Fragment fragment = new TrackerFragment();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -127,7 +134,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
                     @Override
                     public void onItemClick(int clickedItemIndex) {
                         Log.d(TAG,"item clicked #" + clickedItemIndex);
-
+                        Toast.makeText(getContext(), "Added into today's calories", Toast.LENGTH_SHORT).show();
                         // ADD INTO DB THE CALORIE OF THE ITEM, THEN TOAST
                     }
                 });
