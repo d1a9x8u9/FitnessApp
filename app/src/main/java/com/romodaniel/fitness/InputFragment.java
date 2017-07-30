@@ -12,9 +12,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.romodaniel.fitness.R;
-import com.romodaniel.fitness.SearchFragment;
-import com.romodaniel.fitness.TrackerFragment;
 
 /**
  * Created by Daniel on 7/29/2017.
@@ -214,7 +211,6 @@ public class InputFragment extends Fragment {
                     if(num.isEmpty())
                         numScreen.setText("0");
                 }
-
             }
         });
 
@@ -222,8 +218,8 @@ public class InputFragment extends Fragment {
             String num;
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), numScreen.getText().toString().concat(" cal added into calories"), Toast.LENGTH_SHORT).show();
-
+                // Get 'numScreen', convert, and return to TrackerFragment to add ito db
+                TrackerFragment.addFood("MANUAL INSERT",numScreen.getText().toString(),getContext());
             }
         });
 

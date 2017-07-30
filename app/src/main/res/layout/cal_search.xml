@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search Item"
+        android:text="Search Calories"
         android:textSize="18dp"
         android:textColor="#E3F2FD"
         android:background="#2196F3"

@@ -1,5 +1,6 @@
 package com.romodaniel.fitness;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -7,13 +8,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.romodaniel.fitness.Utilities.MyAdapter;
 
@@ -52,22 +53,18 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
         date.setText(formattedDate);
 
         // Setup buttons
+        // If add button clicked, then redirect to SearchFragment
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 SearchFragment fragment = new SearchFragment();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.contentMain, fragment);
                 ft.commit();
-
-//                Log.d(TAG,"Add food button clicked");
-//                FetchSearchedItem fetch = new FetchSearchedItem();
-//                fetch.execute();
             }
         });
-
+        // If manual button clicked, then redirect to InputFragment
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +75,6 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
                 ft.commit();
             }
         });
-
         return view;
     }
 
@@ -95,7 +91,11 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onItemClick(Cursor cursor, int clickedItemIndex) {
         cursor.moveToPosition(clickedItemIndex);
-        Log.d(TAG, String.format("Item clicked # ", clickedItemIndex));
+    }
+
+    public static void addFood(String name, String cal, Context context) {
+        Toast.makeText(context, "Added " + cal  + " calories from " + name, Toast.LENGTH_SHORT).show();
+        // TODO add argument's into calories db
     }
 
 }

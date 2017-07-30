@@ -27,7 +27,6 @@ public final class NetworkUtils {
             "https://api.nutritionix.com/v1_1/search/";
     public static final String NEWS_BASE_URL = STATIC_NEWS_URL;
 
-    // TODO insert apikey below
     public static final String appKey = "d25dd44a9d60b2a60da02aa028229157";
     public static final String appId= "497f09c8";
     public static final String results = "0:15";
@@ -41,8 +40,6 @@ public final class NetworkUtils {
     public static String PARAM_FIELDS = "fields";
     public static String PARAM_APPID = "appId";
     public static String PARAM_APIKEY = "appKey";
-
-
 
 
     public static URL buildUrl(String search) {

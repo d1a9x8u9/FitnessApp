@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Enter Calorie"
+            android:text="Enter Calories"
             android:textSize="18dp"
             android:textColor="#E3F2FD"
             android:background="#2196F3"

@@ -2,12 +2,15 @@ package com.romodaniel.fitness.Utilities;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.romodaniel.fitness.R;
+import com.romodaniel.fitness.TrackerFragment;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,8 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
 
     private ArrayList<FoodItems> data;
     ItemClickListener listener;
+
+    private final String TAG = "fooditemadapter";
 
 
     public FoodItemAdapter(ArrayList<FoodItems> data, ItemClickListener listener){
@@ -58,6 +63,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
 
         ItemHolder(View view){
             super(view);
+
             foodname = (TextView)view.findViewById(R.id.foodName);
             foodcalorie = (TextView)view.findViewById(R.id.foodCalorie);
 
@@ -65,6 +71,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
         }
 
         public void bind(int pos){
+            // Get data to display into layout 'calorieitem'.
             FoodItems repo = data.get(pos);
             foodname.setText(repo.getItem_name());
             foodcalorie.setText(repo.getCalories().concat(" cal"));
@@ -74,6 +81,9 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
         public void onClick(View v) {
             int pos = getAdapterPosition();
             listener.onItemClick(pos);
+
+            // Return selected item's calorie to TrackerFragment
+            TrackerFragment.addFood(foodname.getText().toString(),foodcalorie.getText().toString(),v.getContext());
         }
     }
 
