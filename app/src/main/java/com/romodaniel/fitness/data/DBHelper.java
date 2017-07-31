@@ -36,7 +36,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(queryString);
 
         String queryString2 = "CREATE TABLE " + Contract.TABLE_USER.TABLE_NAME + " (" +
-                Contract.TABLE_USER.COLUMN_NAME_NAME + " TEXT," +
+                Contract.TABLE_USER.COLUMN_NAME_FIRST_NAME + " TEXT," +
+                Contract.TABLE_USER.COLUMN_NAME_LAST_NAME + " TEXT," +
                 Contract.TABLE_USER.COLUMN_NAME_GENDER + " TEXT," +
                 Contract.TABLE_USER.COLUMN_NAME_HEIGHT + " INTEGER," +
                 Contract.TABLE_USER.COLUMN_NAME_WEIGHT + " INTEGER);";

@@ -38,5 +38,6 @@
     <string name="action_pause">Pause</string>
     <string name="action_stop">Stop</string>
     <string name="total">Total:</string>
+    <string name="user_name">User Name</string>
 
 </resources>

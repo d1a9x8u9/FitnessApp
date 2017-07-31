@@ -17,13 +17,8 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/rock" />
 
-    <LinearLayout
-        android:id="@+id/user_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <include
+        layout="@layout/user_input"/>
 
-        
-    </LinearLayout>
 
 </FrameLayout>

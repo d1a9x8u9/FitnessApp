@@ -6,24 +6,34 @@ package com.romodaniel.fitness.data;
 
 public class User
 {
-    String name;
+    String fName;
+    String lName;
     String sex;
     int lbs;
     int height;
 
-    public User(String name, String sex, int lbs, int height) {
-        this.name = name;
+    public User(String fName, String lName, String sex, int lbs, int height) {
+        this.fName = fName;
+        this.lName = lName;
         this.sex = sex;
         this.lbs = lbs;
         this.height = height;
     }
 
-    public String getName() {
-        return name;
+    public String getfName() {
+        return fName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     public String getSex() {
@@ -48,5 +58,16 @@ public class User
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", lbs=" + lbs +
+                ", height=" + height +
+                '}';
     }
 }
