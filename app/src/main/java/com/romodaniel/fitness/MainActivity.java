@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if(isFirst){
-          //  findViewById(R.id.user_first).setVisibility(View.VISIBLE);
+          //findViewById(R.id.user_first).setVisibility(View.VISIBLE);
 
             submit = (Button)  findViewById(R.id.submit);
             fName = (EditText) findViewById(R.id.f_name);
