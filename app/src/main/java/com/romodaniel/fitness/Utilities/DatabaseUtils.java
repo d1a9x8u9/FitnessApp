@@ -6,8 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import static com.romodaniel.fitness.Utilities.Contract.TABLE_FITNESS.COLUMN_NAME_DATE;
-import static com.romodaniel.fitness.Utilities.Contract.TABLE_FITNESS.TABLE_NAME;
+import static com.romodaniel.fitness.data.Contract.TABLE_FITNESS.*;
 
 /**
  * Created by Daniel on 7/26/2017.

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.romodaniel.fitness.R;
+import com.romodaniel.fitness.data.Contract;
 
 import org.w3c.dom.Text;
 
