@@ -4,10 +4,7 @@ package com.romodaniel.fitness;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +64,7 @@ public class ActivityFragment extends Fragment {
 
 
         totalMiles.setText("" + miles);
-        totalCal.setText(String.format(Locale.US, "%.2f",calories));
+        totalCal.setText(String.format(Locale.US, "%.2f", calories));
         totalTime.setText(String.format(Locale.US, "%02d:%02d:%02d", sec/36000, (sec/60)%60, sec %60));
 
 
@@ -87,10 +84,9 @@ public class ActivityFragment extends Fragment {
                 view.findViewById(R.id.start).setVisibility(View.GONE);
 
 
-                FragmentManager fm = getFragmentManager();
-                fm.beginTransaction()
+                getFragmentManager()
+                        .beginTransaction()
                         .replace(R.id.fragment_activity, new GoogleMapsFragment())
-                        .addToBackStack("tag")
                         .commit();
 
             }
