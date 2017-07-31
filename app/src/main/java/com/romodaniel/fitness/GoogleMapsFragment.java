@@ -3,6 +3,7 @@ package com.romodaniel.fitness;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
@@ -33,12 +34,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
+import com.romodaniel.fitness.data.Contract;
 import com.romodaniel.fitness.data.DBHelper;
 import com.romodaniel.fitness.data.RunsDatabaseUtils;
 import com.romodaniel.fitness.data.Runs;
+import com.romodaniel.fitness.data.User;
+import com.romodaniel.fitness.data.UserDbUtils;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import static com.romodaniel.fitness.data.Contract.TABLE_USER.COLUMN_NAME_FIRST_NAME;
+import static com.romodaniel.fitness.data.Contract.TABLE_USER.COLUMN_NAME_LAST_NAME;
 
 public class GoogleMapsFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
@@ -65,6 +72,8 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     private SQLiteDatabase db;
     double TotalDistanceMiles;
     private long steps;
+
+    private User user;
 
     private Runnable updateTimeThread = new Runnable() {
 
@@ -116,6 +125,15 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         mCountedSteps = (TextView) view.findViewById(R.id.counted_steps);
         mBurntCalories = (TextView) view.findViewById(R.id.burnt_calories);
 
+        Cursor userCursor = UserDbUtils.getAll(db);
+        userCursor.moveToFirst();
+        String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
+        String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
+        user = new User(firstName,lastName,
+                userCursor.getString(userCursor.getColumnIndex(Contract.TABLE_USER.COLUMN_NAME_GENDER)),
+                userCursor.getInt(userCursor.getColumnIndex(Contract.TABLE_USER.COLUMN_NAME_HEIGHT)),
+                userCursor.getInt(userCursor.getColumnIndex(Contract.TABLE_USER.COLUMN_NAME_WEIGHT)));
+
         return view;
     }
 
@@ -156,10 +174,10 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
                 TotalDistanceMiles = Double.parseDouble(String.format(Locale.US, "%.2f", TotalDistanceMiles));
                 //// TODO: 7/28/2017 get height from user
-                mCountedSteps.setText(String.format(Locale.US, "%d steps",Math.round(calculateSteps(66)*TotalDistanceMiles)));
+                mCountedSteps.setText(String.format(Locale.US, "%d steps",Math.round(calculateSteps(user.getHeight())*TotalDistanceMiles)));
                 steps= Math.round(calculateSteps(66)*TotalDistanceMiles);
                 //// TODO: 7/28/2017 get lbs from user
-                mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calculateNetCalories(TotalDistanceMiles,activeTime,125)));
+                mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calculateNetCalories(TotalDistanceMiles,activeTime,user.getLbs())));
 
 
 
