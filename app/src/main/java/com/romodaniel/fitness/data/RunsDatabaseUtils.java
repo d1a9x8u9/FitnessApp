@@ -11,7 +11,7 @@ import static com.romodaniel.fitness.data.Contract.TABLE_RUNS.*;
  * Created by drdan on 7/26/2017.
  */
 
-public class DatabaseUtils {
+public class RunsDatabaseUtils {
 
     public static Cursor getAll(SQLiteDatabase db) {
         Cursor cursor = db.query(
@@ -38,7 +38,7 @@ public class DatabaseUtils {
 
 
 
-//    cursor = DatabaseUtils.getAll(db);
+//    cursor = RunsDatabaseUtils.getAll(db);
 //
 //
 //                while(cursor.moveToNext()){

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.romodaniel.fitness.data.Contract;
 import com.romodaniel.fitness.data.DBHelper;
-import com.romodaniel.fitness.data.DatabaseUtils;
+import com.romodaniel.fitness.data.RunsDatabaseUtils;
 
 import java.util.Locale;
 
@@ -49,7 +49,7 @@ public class ActivityFragment extends Fragment {
 
         DBHelper dbhelper = new DBHelper(this.getActivity());
         db = dbhelper.getWritableDatabase();
-        Cursor cursor = DatabaseUtils.getAll(db);
+        Cursor cursor = RunsDatabaseUtils.getAll(db);
 
         double miles=0;
         double calories =0;

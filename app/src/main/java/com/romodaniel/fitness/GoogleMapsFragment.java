@@ -34,7 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 import com.romodaniel.fitness.data.DBHelper;
-import com.romodaniel.fitness.data.DatabaseUtils;
+import com.romodaniel.fitness.data.RunsDatabaseUtils;
 import com.romodaniel.fitness.data.Runs;
 
 import java.util.ArrayList;
@@ -286,7 +286,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 //// TODO: 7/28/2017 get lbs from user
                 double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calculateNetCalories(TotalDistanceMiles,activeTime,125)));
                 Runs run = new Runs(cal, TotalDistanceMiles,steps,activeTime);
-                DatabaseUtils.InsertToDb(db,run);
+                RunsDatabaseUtils.InsertToDb(db,run);
 
             }
         });
