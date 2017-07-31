@@ -26,18 +26,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String queryString = "CREATE TABLE " + Contract.TABLE_RUNS.TABLE_NAME + " ("+
                 Contract.TABLE_RUNS._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Contract.TABLE_RUNS.COLUMN_NAME_TIME + " int, " +
-                Contract.TABLE_RUNS.COLUMN_NAME_MILES + " double, " +
-                Contract.TABLE_RUNS.COLUMN_NAME_CAL + " int, " +
-                Contract.TABLE_RUNS.COLUMN_NAME_STEPS + " int" +
+                Contract.TABLE_RUNS.COLUMN_NAME_TIME + " INTEGER, " +
+                Contract.TABLE_RUNS.COLUMN_NAME_MILES + " DOUBLE, " +
+                Contract.TABLE_RUNS.COLUMN_NAME_CAL + " DOUBLE, " +
+                Contract.TABLE_RUNS.COLUMN_NAME_STEPS + " INTEGER" +
                 "); ";
 
         Log.d(TAG, "create Table sql: " +queryString);
         db.execSQL(queryString);
 
         String queryString2 = "CREATE TABLE " + Contract.TABLE_USER.TABLE_NAME + " (" +
+                Contract.TABLE_USER.COLUMN_NAME_NAME + " TEXT," +
                 Contract.TABLE_USER.COLUMN_NAME_GENDER + " TEXT," +
-                Contract.TABLE_USER.COLUMN_NAME_AGE + " INTEGER," +
+                Contract.TABLE_USER.COLUMN_NAME_HEIGHT + " INTEGER," +
                 Contract.TABLE_USER.COLUMN_NAME_WEIGHT + " INTEGER);";
 
 
