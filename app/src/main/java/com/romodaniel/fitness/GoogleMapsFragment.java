@@ -302,7 +302,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 Log.d(TAG, String.format(Locale.US, "Total time: %02d:%02d", minutes, seconds));
 
                 //// TODO: 7/28/2017 get lbs from user
-                double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calculateNetCalories(TotalDistanceMiles,activeTime,125)));
+                double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calculateNetCalories(TotalDistanceMiles,activeTime,user.getLbs())));
                 Runs run = new Runs(cal, TotalDistanceMiles,steps,activeTime);
                 RunsDatabaseUtils.InsertToDb(db,run);
 
