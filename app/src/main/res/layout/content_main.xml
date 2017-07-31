@@ -18,6 +18,7 @@
         app:srcCompat="@drawable/rock" />
 
     <include
+        android:id="@+id/user_first"
         layout="@layout/user_input"/>
 
 
