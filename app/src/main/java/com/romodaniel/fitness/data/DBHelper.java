@@ -46,6 +46,16 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d(TAG, "create Table sql: " +queryString2);
         db.execSQL(queryString2);
 
+        String queryString3 = "CREATE TABLE " + Contract.TABLE_FITNESS.TABLE_NAME + " ("+
+                Contract.TABLE_FITNESS._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                Contract.TABLE_FITNESS.COLUMN_NAME_DATE + " VARCHAR(10) NO NULL," +
+                Contract.TABLE_FITNESS.COLUMN_NAME_BREAKFAST + " TEXT NOT NULL, " +
+                Contract.TABLE_FITNESS.COLUMN_NAME_LUNCH + " TEXT NO NULL," +
+                Contract.TABLE_FITNESS.COLUMN_NAME_DINNER + " TEXT NOT NULL); ";
+
+        Log.d(TAG, "Create table SQL: " + queryString3);
+        db.execSQL(queryString);
+
 
     }
 

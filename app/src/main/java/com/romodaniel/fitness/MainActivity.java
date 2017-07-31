@@ -3,6 +3,7 @@ package com.romodaniel.fitness;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +33,9 @@ import com.romodaniel.fitness.data.User;
 import com.romodaniel.fitness.data.UserDbUtils;
 
 import static com.romodaniel.fitness.data.Contract.TABLE_USER.*;
+
+import java.util.Date;
+
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +52,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userName;
 
     private String TAG= "userTest";
+
+    private Cursor cursor;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//
+//        db = helper.getWritableDatabase();
+//        cursor = getAllItems(db);
+//        Log.d("mainactivity","db: " + db);
+
+        // TODO - CREATE AN ADAPTER
+    }
+
+//    private Cursor getAllItems(SQLiteDatabase db) {
+//
+//        return db.query(
+//                Contract.TABLE_FITNESS.TABLE_NAME,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                Contract.TABLE_FITNESS.COLUMN_NAME_DATE
+//        );
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

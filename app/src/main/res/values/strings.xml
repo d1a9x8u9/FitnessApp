@@ -20,6 +20,7 @@
     <string name="track_blank_fragment">Track fragment</string>
     <string name="profile_blank_fragment">profile fragment</string>
 
+
     <!--Strings for the toScene google maps-->
     <string name="distance">Distance</string>
     <string name="speed">Speed</string>
@@ -39,5 +40,6 @@
     <string name="action_stop">Stop</string>
     <string name="total">Total:</string>
     <string name="user_name">User Name</string>
+    <string-array name="cdates"></string-array>
 
 </resources>
