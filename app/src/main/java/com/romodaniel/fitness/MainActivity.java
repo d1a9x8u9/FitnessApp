@@ -1,9 +1,7 @@
 package com.romodaniel.fitness;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,9 +30,6 @@ import com.romodaniel.fitness.data.User;
 import com.romodaniel.fitness.data.UserDbUtils;
 
 import static com.romodaniel.fitness.data.Contract.TABLE_USER.*;
-
-import java.util.Date;
-
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,16 +50,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Cursor cursor;
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
 //
 //        db = helper.getWritableDatabase();
 //        cursor = getAllItems(db);
 //        Log.d("mainactivity","db: " + db);
-
-        // TODO - CREATE AN ADAPTER
-    }
+//
+//        // TODO - CREATE AN ADAPTER
+//    }
 
 //    private Cursor getAllItems(SQLiteDatabase db) {
 //
