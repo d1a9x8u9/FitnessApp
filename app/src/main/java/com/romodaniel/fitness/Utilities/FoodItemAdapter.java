@@ -1,6 +1,8 @@
 package com.romodaniel.fitness.Utilities;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,9 @@ import com.romodaniel.fitness.TrackerFragment;
 
 import java.util.ArrayList;
 
+import static com.romodaniel.fitness.Utilities.Contract.TABLE_FITNESS.*;
+
+
 /**
  * Created by Daniel on 7/27/2017.
  */
@@ -24,7 +29,6 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
     ItemClickListener listener;
 
     private final String TAG = "fooditemadapter";
-
 
     public FoodItemAdapter(ArrayList<FoodItems> data, ItemClickListener listener){
         this.data = data;
@@ -83,8 +87,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
             listener.onItemClick(pos);
 
             // Return selected item's calorie to TrackerFragment
-            TrackerFragment.addFood(foodname.getText().toString(),foodcalorie.getText().toString(),v.getContext());
+            TrackerFragment.addFood(foodname.getText().toString(), foodcalorie.getText().toString(), v.getContext());
         }
     }
-
 }

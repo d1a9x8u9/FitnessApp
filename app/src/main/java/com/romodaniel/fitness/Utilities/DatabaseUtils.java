@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import static android.provider.BaseColumns._ID;
 import static com.romodaniel.fitness.Utilities.Contract.TABLE_FITNESS.COLUMN_NAME_DATE;
 import static com.romodaniel.fitness.Utilities.Contract.TABLE_FITNESS.TABLE_NAME;
 
@@ -14,8 +15,8 @@ import static com.romodaniel.fitness.Utilities.Contract.TABLE_FITNESS.TABLE_NAME
  */
 
 public class DatabaseUtils {
-    public static Cursor getAllBreakfast(SQLiteDatabase db) {
-        String[] columns = {"_id","breakfast"};
+    public static Cursor getAll(SQLiteDatabase db) {
+        String[] columns = {"totalcalories"};
         Cursor cursor = db.query(
                 TABLE_NAME,
                 columns,
@@ -23,35 +24,7 @@ public class DatabaseUtils {
                 null,
                 null,
                 null,
-                COLUMN_NAME_DATE + " DESC"
-        );
-        return cursor;
-    }
-
-    public static Cursor getAllLunch(SQLiteDatabase db) {
-        String[] columns = {"_id","lunch"};
-        Cursor cursor = db.query(
-                TABLE_NAME,
-                columns,
-                null,
-                null,
-                null,
-                null,
-                COLUMN_NAME_DATE + " DESC"
-        );
-        return cursor;
-    }
-
-    public static Cursor getAllDinner(SQLiteDatabase db) {
-        String[] columns = {"_id","dinner"};
-        Cursor cursor = db.query(
-                TABLE_NAME,
-                columns,
-                null,
-                null,
-                null,
-                null,
-                COLUMN_NAME_DATE + " DESC"
+                null
         );
         return cursor;
     }

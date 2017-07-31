@@ -1,7 +1,6 @@
 package com.romodaniel.fitness;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -16,17 +15,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.romodaniel.fitness.Utilities.MyAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class TrackerFragment extends Fragment implements AdapterView.OnItemSelectedListener, MyAdapter.ItemClickListener {
+public class TrackerFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private TextView date;
+    public  TextView totalcal;
     private Button addButton;
     private Button manualButton;
-    private SQLiteDatabase db;
+    private static SQLiteDatabase db;
 
     private final String TAG = "addcalorie";
 
@@ -34,15 +33,11 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tracker,container,false);
 
         date = (TextView) view.findViewById(R.id.date);
+        totalcal = (TextView) view.findViewById(R.id.totalCalories);
         addButton = (Button) view.findViewById(R.id.addButton);
         manualButton = (Button) view.findViewById(R.id.manualButton);
 
@@ -52,7 +47,8 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
         final String formattedDate = df.format(c.getTime());
         date.setText(formattedDate);
 
-        // Setup buttons
+        // TODO direct 'totalcal' to db data and grab total calories column
+
         // If add button clicked, then redirect to SearchFragment
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,14 +84,14 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
 
     }
 
-    @Override
-    public void onItemClick(Cursor cursor, int clickedItemIndex) {
-        cursor.moveToPosition(clickedItemIndex);
-    }
-
     public static void addFood(String name, String cal, Context context) {
         Toast.makeText(context, "Added " + cal  + " calories from " + name, Toast.LENGTH_SHORT).show();
-        // TODO add argument's into calories db
+
+        // TODO add argument's into calories db by getting reference to db and setting calories
+
     }
 
+    public static SQLiteDatabase getDb() {
+        return db;
+    }
 }

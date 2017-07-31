@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.romodaniel.fitness.Utilities.FoodItemAdapter;
 import com.romodaniel.fitness.Utilities.FoodItems;
@@ -34,6 +35,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
 
     Button search, done;
     EditText q;
+    ProgressBar progress;
     String query;
     private RecyclerView fooditemsrv;
 
@@ -52,6 +54,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         search = (Button) view.findViewById(R.id.searchButton);
         done = (Button) view.findViewById(R.id.doneButton);
         q = (EditText) view.findViewById(R.id.search);
+        progress = (ProgressBar) view.findViewById(R.id.progressBar);
 
         // Set focus to search bar.
         q.requestFocus();
@@ -64,10 +67,15 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         search.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 // get edit text and use it to search
                 query= q.getText().toString();
                 FetchSearchedItem fetch = new FetchSearchedItem();
                 fetch.execute();
+
+                // Hides keyboard
+                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });
 
@@ -103,11 +111,11 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progress.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected ArrayList<FoodItems> doInBackground(URL... strings) {
-
             ArrayList<FoodItems> result = null;
 
             URL url = NetworkUtils.buildUrl(query);
@@ -121,19 +129,17 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
             } catch (Exception e){
                 e.printStackTrace();
             }
-
             return result;
-
         }
 
         @Override
         protected void onPostExecute(final ArrayList<FoodItems> newsData) {
             super.onPostExecute(newsData);
+            progress.setVisibility(View.GONE);
             if(newsData!=null){
                 FoodItemAdapter adapter = new FoodItemAdapter(newsData, new FoodItemAdapter.ItemClickListener() {
                     @Override
                     public void onItemClick(int clickedItemIndex) {
-
                     }
                 });
                 fooditemsrv.setAdapter(adapter);

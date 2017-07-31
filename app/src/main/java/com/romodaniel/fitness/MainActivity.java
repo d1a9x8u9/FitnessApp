@@ -38,25 +38,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
-        helper = new DatabaseHelper(this);
-        db = helper.getWritableDatabase();
-        cursor = getAllItems(db);
-        Log.d("mainactivity","db: " + db);
-
-        // TODO - CREATE AN ADAPTER
-    }
-
-    private Cursor getAllItems(SQLiteDatabase db) {
-
-        return db.query(
-                Contract.TABLE_FITNESS.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                Contract.TABLE_FITNESS.COLUMN_NAME_DATE
-        );
     }
 
     @Override
