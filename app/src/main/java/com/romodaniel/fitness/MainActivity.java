@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EditText inch;
     private EditText weight;
     private TextView userName;
-    private boolean isFirst;
 
     private String TAG= "userTest";
 
@@ -75,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        isFirst = prefs.getBoolean("isfirst", true);
+        boolean isFirst = prefs.getBoolean("isfirst", true);
+
 
         Log.d(TAG, "is first start up:"+ isFirst);
 
@@ -123,22 +123,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.d(TAG, "userInfo: "+ user.toString());
                         UserDbUtils.InsertToDb(db,user);
 
-                        setUserName();
+                        Cursor userCursor = UserDbUtils.getAll(db);
+                        Log.d("userCursor", userCursor.moveToFirst() +"");
+                        if(userCursor.moveToFirst()){
+                            String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
+                            String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
+                            userName.setText(firstName + " "+ lastName);
+
+                        }
                         findViewById(R.id.user_first).setVisibility(View.GONE);
-                        isFirst = false;
                     }
 
                 }
             });
 
-
-            isFirst = false;
-
-        }else{
-            findViewById(R.id.user_first).setVisibility(View.GONE);
-            setUserName();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("isfirst", false);
+            editor.commit();
 
         }
+
+        Cursor userCursor = UserDbUtils.getAll(db);
+        Log.d("userCursor", userCursor.moveToFirst() +"");
+        if(userCursor.moveToFirst()){
+            String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
+            String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
+            userName.setText(firstName + " "+ lastName);
+
+        }
+
+
 
 
     }
@@ -218,21 +232,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-    public void setUserName(){
-        Cursor userCursor = UserDbUtils.getAll(db);
-        Log.d("userCursor", userCursor.moveToFirst() +"");
-        if(userCursor.moveToNext()){
-            String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
-            String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
-            userName.setText(firstName + " "+ lastName);
-
-        }
-    }
-
-
-
-
 
 }

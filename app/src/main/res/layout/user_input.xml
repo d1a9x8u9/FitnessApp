@@ -29,7 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Gender"
+        android:hint="Gender M or F"
+        android:digits="mf"
+        android:maxLength="1"
         />
     <EditText
         android:id="@+id/weight"
