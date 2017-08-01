@@ -1,14 +1,23 @@
 package com.romodaniel.fitness;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.romodaniel.fitness.data.CalDbUtils;
+import com.romodaniel.fitness.data.Cal_Record;
+import com.romodaniel.fitness.data.DBHelper;
+
+import java.util.Calendar;
 
 /**
  * Created by fy on 7/26/17.
@@ -16,14 +25,20 @@ import android.widget.TextView;
 
 public class InputFragment extends Fragment {
 
+    private SQLiteDatabase db;
+    private DBHelper helper;
     ImageButton searchButton, backSpace;
     TextView numScreen, backButton;
     Button button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, addButton;
+    String date, description;
+
+    int month, day, year;
+
+    private String m_Text = "";
 
     public InputFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +62,9 @@ public class InputFragment extends Fragment {
         button7 = (Button) view.findViewById(R.id.Button7);
         button8 = (Button) view.findViewById(R.id.Button8);
         button9 = (Button) view.findViewById(R.id.Button9);
+
+        helper = new DBHelper(getActivity());
+        db = helper.getWritableDatabase();
 
         backSpace = (ImageButton) view.findViewById(R.id.ButtonBS);
 
@@ -206,21 +224,47 @@ public class InputFragment extends Fragment {
                     if(num.isEmpty())
                         numScreen.setText("0");
                 }
-
             }
         });
 
+
+
+
+
+
+
+        description = "New Entry";
+
+
         addButton.setOnClickListener( new View.OnClickListener(){
-            String num;
             @Override
             public void onClick(View v) {
 
+                int value = Integer.parseInt(numScreen.getText().toString().trim());
+
+                Log.d("calvalue", value+"");
+
+                Cal_Record newRecord = new Cal_Record(value,date,description);
+
+                Log.d("calrecord", newRecord.getDate() + " " + newRecord.getValue() + " " + newRecord.getDesc());
+
+                CalDbUtils.InsertToDb(db, newRecord);
+
+                Toast.makeText(getContext(), numScreen.getText().toString().concat(" cal added into calories"), Toast.LENGTH_SHORT).show();
+
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction()
+                        .replace(R.id.contentMain, new TrackerFragment())
+                        .commit();
+
             }
         });
-
         return view;
-
     }
+
+
+
+
 
     public boolean checkZero(TextView numScreen)
     {
@@ -240,6 +284,10 @@ public class InputFragment extends Fragment {
         }
         else
             return false;
+    }
+
+    public void setDate(String date){
+        this.date = date;
     }
 
 }

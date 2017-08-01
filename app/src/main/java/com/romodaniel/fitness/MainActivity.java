@@ -1,5 +1,7 @@
 package com.romodaniel.fitness;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 
@@ -8,14 +10,47 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageView iv;
+
+    public static SQLiteDatabase getDb() {
+        return db;
+    }
+
+    private static SQLiteDatabase db;
+    private DatabaseHelper helper;
+    private Cursor cursor;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        helper = new DatabaseHelper(this);
+        db = helper.getWritableDatabase();
+        cursor = getAllItems(db);
+        Log.d("mainactivity","db: " + db);
+
+        // TODO - CREATE AN ADAPTER
+    }
+
+    private Cursor getAllItems(SQLiteDatabase db) {
+
+        return db.query(
+                Contract.TABLE_FITNESS.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                Contract.TABLE_FITNESS.COLUMN_NAME_DATE
+        );
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,40 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" back"
-            android:textSize="18dp"
-            android:textColor="#E3F2FD"
-            android:background="#2196F3"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Search Calory"
-            android:textSize="18dp"
-            android:textColor="#E3F2FD"
-            android:background="#2196F3"
-            android:gravity="center"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="        "
-            android:textSize="18dp"
-            android:textColor="#E3F2FD"
-            android:background="#2196F3"
-            />
-    </LinearLayout>
+        android:text="Search Item"
+        android:textSize="18dp"
+        android:textColor="#E3F2FD"
+        android:background="#2196F3"
+        android:gravity="center"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,147 +20,51 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="1"
             android:gravity="right"
             android:hint="food"
-            android:textSize="43dp" />
+            android:textSize="50dp" />
 
-        <ImageButton
+        <Button
             android:id="@+id/searchButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/search"
-            android:scaleType="fitCenter"
-            android:padding="10dp"
-            />
+            android:text="search" />
+
 
     </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fooditemrv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Result"
-                    android:textSize="30dp"
-                    />
-            </LinearLayout>
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Result"
-                    android:textSize="30dp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Result"
-                    android:textSize="30dp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Result"
-                    android:textSize="30dp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Result"
-                    android:textSize="30dp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Result"
-                    android:textSize="30dp"
-                    />
-            </LinearLayout>
 
         </LinearLayout>
 
 
     </ScrollView>
 
-
     <Button
         android:layout_width="match_parent"
+        android:id="@+id/doneButton"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Add"
+        android:text="DONE"
         android:textSize="40dp"
         android:textColor="#E3F2FD"
         android:background="#2196F3"
