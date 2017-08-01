@@ -227,7 +227,10 @@ public class InputFragment extends Fragment {
             }
         });
 
-        Log.d("setDate",date);
+
+
+
+
 
 
         description = "New Entry";

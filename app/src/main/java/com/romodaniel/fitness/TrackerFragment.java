@@ -70,15 +70,17 @@ public class TrackerFragment extends Fragment {
         db = helper.getWritableDatabase();
 
         Cursor calCursor = CalDbUtils.getAll(db);
-        Log.d("calCursor", calCursor.moveToFirst() +"");
+        if(calCursor.moveToFirst()) {
+            Log.d("calCursor", calCursor.moveToFirst() + "");
 
-        do{
-            String selectDate = calCursor.getString(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_DATE));
-            if(selectDate.equals(date))
-                cal_value +=  calCursor.getInt(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_VALUE));
-        }while(calCursor.moveToNext());
+            do {
+                String selectDate = calCursor.getString(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_DATE));
+                if (selectDate.equals(date))
+                    cal_value += calCursor.getInt(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_VALUE));
+            } while (calCursor.moveToNext());
 
-        cal_screen.setText(""+cal_value);
+            cal_screen.setText("" + cal_value);
+        }
 
 
 
@@ -88,17 +90,19 @@ public class TrackerFragment extends Fragment {
                                              public void onSelectedDayChange(CalendarView view, int year, int month,
                                                                              int dayOfMonth) {
                                                  date = "" + year +'-' + ++month + "-" +dayOfMonth;
-
                                                  Cursor calCursor = CalDbUtils.getAll(db);
-                                                 Log.d("calCursor", calCursor.moveToFirst() +"");
-                                                 cal_value = 0;
-                                                 do{
-                                                     String selectDate = calCursor.getString(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_DATE));
-                                                     if(selectDate.equals(date))
-                                                         cal_value +=  calCursor.getInt(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_VALUE));
-                                                 }while(calCursor.moveToNext());
+                                                 if(calCursor.moveToFirst()) {
 
-                                                 cal_screen.setText(""+cal_value);
+                                                     Log.d("calCursor", calCursor.moveToFirst() + "");
+                                                     cal_value = 0;
+                                                     do {
+                                                         String selectDate = calCursor.getString(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_DATE));
+                                                         if (selectDate.equals(date))
+                                                             cal_value += calCursor.getInt(calCursor.getColumnIndex(Contract.TABLE_EATS.COLUMN_NAME_VALUE));
+                                                     } while (calCursor.moveToNext());
+
+                                                     cal_screen.setText("" + cal_value);
+                                                 }
                                              }
                                          });
 
