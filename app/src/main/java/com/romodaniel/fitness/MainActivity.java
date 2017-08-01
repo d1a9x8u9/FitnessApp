@@ -90,9 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        iv = (ImageView) findViewById(R.id.imageView2);
-
         helper = new DBHelper(this);
         db = helper.getWritableDatabase();
 
@@ -108,65 +105,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if(isFirst){
-          //findViewById(R.id.user_first).setVisibility(View.VISIBLE);
-
-            submit = (Button)  findViewById(R.id.submit);
-            fName = (EditText) findViewById(R.id.f_name);
-            lName = (EditText) findViewById(R.id.l_name);
-            gender= (EditText) findViewById(R.id.gender);
-            weight = (EditText) findViewById(R.id.weight);
-            foot= (EditText) findViewById(R.id.foot);
-            inch= (EditText) findViewById(R.id.inches);
-
-            submit.setOnClickListener(new View.OnClickListener() {
-
-
-                @Override
-                public void onClick(View v) {
-
-                    Log.d("buttonPressed","pressed");
-                    Log.d("buttonPressed", fName.getText().toString());
-
-                    if(fName.getText().toString().trim().isEmpty()
-                            ||lName.getText().toString().trim().isEmpty()
-                            ||gender.getText().toString().trim().isEmpty()
-                            ||weight.getText().toString().trim().isEmpty()
-                            ||foot.getText().toString().trim().isEmpty()
-                            ||inch.getText().toString().trim().isEmpty()){
-
-                        Context context = getApplicationContext();
-                        String warning = "please fill out EVERYTHING";
-                        Toast toast = Toast.makeText(context, warning, Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 100);
-                        toast.show();
-
-                    }
-                    else{
-                        int inches = Integer.parseInt(foot.getText().toString().trim()) * 12 + Integer.parseInt(inch.getText().toString().trim());
-                        int lbs = Integer.parseInt(weight.getText().toString().trim());
-
-                        User user = new User(fName.getText().toString(),lName.getText().toString(),gender.getText().toString().trim(), inches, lbs);
-
-                        Log.d(TAG, "userInfo: "+ user.toString());
-                        UserDbUtils.InsertToDb(db,user);
-
-                        Cursor userCursor = UserDbUtils.getAll(db);
-                        Log.d("userCursor", userCursor.moveToFirst() +"");
-                        if(userCursor.moveToFirst()){
-                            String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
-                            String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
-                            userName.setText(firstName + " "+ lastName);
-
-                        }
-                        //findViewById(R.id.user_first).setVisibility(View.GONE);
-                    }
-
-                }
-            });
-
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("isfirst", false);
-            editor.commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentMain, new UserInputFragment())
+                    .commit();
 
         }
 
