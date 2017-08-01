@@ -119,7 +119,6 @@ public class UserInputFragment extends Fragment {
         });
         return view;
 
-
     }
 
     public String cap(String s){

@@ -83,7 +83,6 @@ public class ActivityFragment extends Fragment {
                 //transition to map tracer
                 view.findViewById(R.id.start).setVisibility(View.GONE);
 
-
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_activity, new GoogleMapsFragment())

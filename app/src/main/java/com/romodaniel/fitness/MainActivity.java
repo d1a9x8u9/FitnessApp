@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View hView = navigationView.getHeaderView(0);
         userName = (TextView) hView.findViewById(R.id.user_name);
-       // greeting = (TextView) findViewById(R.id.greeting);
+        greeting = (TextView) findViewById(R.id.greeting);
 
 
         Cursor userCursor = UserDbUtils.getAll(db);
@@ -70,15 +70,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             findViewById(R.id.main).setVisibility(View.GONE);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main, new UserInputFragment())
+                    .replace(R.id.contentMain, new UserInputFragment())
                     .commit();
 
         }else{
             userCursor.moveToFirst();
             String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
             String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
-           // String greets = greeting.getText().toString()+" " + firstName;
-            //greeting.setText(greets);
+            String greets = greeting.getText().toString()+" " + firstName;
+            greeting.setText(greets);
             userName.setText(firstName + " "+ lastName);
         }
 

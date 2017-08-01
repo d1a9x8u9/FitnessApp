@@ -36,9 +36,6 @@ public class ProfileFragment extends Fragment  {
     private TextView totalTime;
     private TextView totalCal;
 
-    double miles=0;
-    double calories =0;
-    int sec =0;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -85,15 +82,18 @@ public class ProfileFragment extends Fragment  {
                     totalMiles.setText("0");
                     totalCal.setText(String.format(Locale.US, "%.2f", 0.0));
                     totalTime.setText(String.format(Locale.US, "%02d:%02d:%02d", 0, 0, 0));
-                }else if (spinner.getItemAtPosition(position).toString().equals("Total")){
+                }
+                else if (spinner.getItemAtPosition(position).toString().equals("Total")){
 
-
+                    double miles=0;
+                    double calories =0;
+                    int sec =0;
                     //go in every entry add it to the last
-                    while(runCursor.moveToNext()){
+                    do{
                         miles += runCursor.getDouble(runCursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_MILES));
                         calories += runCursor.getDouble(runCursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_CAL));
                         sec += runCursor.getInt(runCursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_TIME));
-                    }
+                    }while(runCursor.moveToNext());
 
                     totalMiles.setText("" + miles);
                     totalCal.setText(String.format(Locale.US, "%.2f", calories));
@@ -108,6 +108,10 @@ public class ProfileFragment extends Fragment  {
 
                 }else {
                     runCursor.moveToLast();
+
+                    double miles;
+                    double calories;
+                    int sec;
 
                     miles = runCursor.getDouble(runCursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_MILES));
                     calories = runCursor.getDouble(runCursor.getColumnIndex(Contract.TABLE_RUNS.COLUMN_NAME_CAL));

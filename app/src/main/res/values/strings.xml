@@ -13,7 +13,7 @@
     <string name="value">Value</string>
     <string name="Total_time">Time</string>
     <string name="Total_miles">Miles</string>
-    <string name="Total_Cal">Calories</string>
+    <string name="Total_Cal">Calories\n Burn</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -42,6 +42,7 @@
     <string name="user_name">User Name</string>
     <string name="greetings">Hello </string>
     <string name="reference">LET\'S GET PHYSICAL</string>
+    <string name="emptyString">Test</string>
     <string-array name="cdates"></string-array>
     <string-array name="history">
         <item>Last</item>

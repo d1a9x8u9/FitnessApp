@@ -3,6 +3,7 @@ package com.romodaniel.fitness;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -322,4 +323,11 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
         return Math.round(5280/((height*.4013)/12));
 
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+
 }
