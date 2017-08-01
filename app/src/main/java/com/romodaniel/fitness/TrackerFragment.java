@@ -60,6 +60,7 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.contentMain, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
 
 //                Log.d(TAG,"Add food button clicked");
@@ -75,6 +76,7 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.contentMain, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
             }
         });

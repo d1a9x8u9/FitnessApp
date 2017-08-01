@@ -40,6 +40,12 @@
     <string name="action_stop">Stop</string>
     <string name="total">Total:</string>
     <string name="user_name">User Name</string>
+    <string name="greetings">Hello </string>
+    <string name="reference">LET\'S GET PHYSICAL</string>
     <string-array name="cdates"></string-array>
+    <string-array name="history">
+        <item>Last</item>
+        <item>Total</item>
+    </string-array>
 
 </resources>

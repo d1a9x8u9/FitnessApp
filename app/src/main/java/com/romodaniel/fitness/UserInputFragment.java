@@ -1,10 +1,11 @@
 package com.romodaniel.fitness;
 
 
-import android.content.Context;
-import android.database.Cursor;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.romodaniel.fitness.data.DBHelper;
@@ -21,8 +21,7 @@ import com.romodaniel.fitness.data.User;
 import com.romodaniel.fitness.data.UserDbUtils;
 
 import static com.google.android.gms.wearable.DataMap.TAG;
-import static com.romodaniel.fitness.data.Contract.TABLE_USER.COLUMN_NAME_FIRST_NAME;
-import static com.romodaniel.fitness.data.Contract.TABLE_USER.COLUMN_NAME_LAST_NAME;
+
 
 
 public class UserInputFragment extends Fragment {
@@ -36,8 +35,8 @@ public class UserInputFragment extends Fragment {
     private EditText foot;
     private EditText inch;
     private EditText weight;
-    private TextView userName;
 
+    private  UserInputFragment userInputFragment;
     public UserInputFragment() {
         // Required empty public constructor
     }
@@ -47,6 +46,8 @@ public class UserInputFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userInputFragment = this;
+
 
     }
 
@@ -63,6 +64,11 @@ public class UserInputFragment extends Fragment {
         weight= (EditText) view.findViewById(R.id.weight);
         foot=   (EditText) view.findViewById(R.id.foot);
         inch=   (EditText) view.findViewById(R.id.inches);
+
+
+        helper = new DBHelper(getActivity());
+        db = helper.getWritableDatabase();
+
 
         submit.setOnClickListener(new View.OnClickListener() {
 
@@ -88,29 +94,41 @@ public class UserInputFragment extends Fragment {
 
                 }
                 else{
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("isfirst", false);
+                    editor.commit();
+
                     int inches = Integer.parseInt(foot.getText().toString().trim()) * 12 + Integer.parseInt(inch.getText().toString().trim());
                     int lbs = Integer.parseInt(weight.getText().toString().trim());
 
-                    User user = new User(fName.getText().toString(),lName.getText().toString(),gender.getText().toString().trim(), inches, lbs);
+                    User user = new User(cap(fName.getText().toString().trim()),cap(lName.getText().toString().trim()),cap(gender.getText().toString()), inches, lbs);
 
                     Log.d(TAG, "userInfo: "+ user.toString());
                     UserDbUtils.InsertToDb(db,user);
 
-                    Cursor userCursor = UserDbUtils.getAll(db);
-                    Log.d("userCursor", userCursor.moveToFirst() +"");
-                    if(userCursor.moveToFirst()){
-                        String firstName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_FIRST_NAME));
-                        String lastName = userCursor.getString(userCursor.getColumnIndex(COLUMN_NAME_LAST_NAME));
-                        userName.setText(firstName + " "+ lastName);
 
-                    }
-                    //findViewById(R.id.user_first).setVisibility(View.GONE);
+                    Intent intent = new Intent(getActivity().getApplication(), MainActivity.class);
+                    startActivity(intent);
+
                 }
+
+
 
             }
         });
         return view;
 
+
+    }
+
+    public String cap(String s){
+
+        if(s.length()>1){
+            return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+        }else {
+            return s.toUpperCase();
+        }
 
     }
 

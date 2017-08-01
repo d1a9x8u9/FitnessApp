@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -173,13 +175,9 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 mAveragePaceView.setText(String.format(Locale.US, "%d:%02d/mi", minutes, seconds));
                 mTotalDistanceView.setText(String.format(Locale.US, "%.2f mi", TotalDistanceMiles));
                 TotalDistanceMiles = Double.parseDouble(String.format(Locale.US, "%.2f", TotalDistanceMiles));
-                //// TODO: 7/28/2017 get height from user
                 mCountedSteps.setText(String.format(Locale.US, "%d steps",Math.round(calculateSteps(user.getHeight())*TotalDistanceMiles)));
                 steps= Math.round(calculateSteps(66)*TotalDistanceMiles);
-                //// TODO: 7/28/2017 get lbs from user
                 mBurntCalories.setText(String.format(Locale.US, "%.2f cal", calculateNetCalories(TotalDistanceMiles,activeTime,user.getLbs())));
-
-
 
             }
         }
@@ -238,8 +236,6 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
         mLocationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view)).getMapAsync(this);
-
-
 
         final Button startPauseButton = (Button) getActivity().findViewById(R.id.start_pause_button);
         final Button stopButton = (Button) getActivity().findViewById(R.id.stop_button);
@@ -301,7 +297,6 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
                 Log.d(TAG, String.format(Locale.US, "Total time: %02d:%02d", minutes, seconds));
 
-                //// TODO: 7/28/2017 get lbs from user
                 double cal = Double.parseDouble(String.format(Locale.US, "%.2f", calculateNetCalories(TotalDistanceMiles,activeTime,user.getLbs())));
                 Runs run = new Runs(cal, TotalDistanceMiles,steps,activeTime);
                 RunsDatabaseUtils.InsertToDb(db,run);

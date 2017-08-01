@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Gender M or F"
-        android:digits="mf"
+        android:digits="mMfF"
         android:maxLength="1"
         />
     <EditText

@@ -1,3 +1,4 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,163 +7,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.romodaniel.fitness.ActivityFragment"
-    android:padding="10dp">
-
-    <LinearLayout
-        android:id="@+id/start"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/startRun"
-            android:layout_width="276dp"
-            android:layout_height="223dp"
-            app:srcCompat="@drawable/start"
-            android:paddingBottom="40dp"
-            android:paddingTop="30dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/total"
-            android:textSize="@dimen/label"/>
+    android:layout_margin="10dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:padding="20dp"
-            >
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/startRun"
+                android:layout_width="256dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/start" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="40dp">
+                android:layout_gravity="center"
+                android:text="@string/total"
+                android:textSize="@dimen/label"
+                android:layout_marginTop="15dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Total_Run"
-                    android:textSize="@dimen/label"
-                    android:layout_gravity="center"/>
-
-                <View
-                    android:layout_width="80dp"
-                    android:layout_height="5dp"
-                    android:background="@color/colorAccent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/total_runs"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/value"
-                    android:textSize="25dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="40dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Total_miles"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/label" />
-
-                <View
-                    android:layout_width="85dp"
-                    android:layout_height="5dp"
-                    android:background="@color/colorAccent" />
-
-                <TextView
-                    android:id="@+id/total_miles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/value"
-                    android:textSize="25dp" />
-            </LinearLayout>
+            <include
+                layout="@layout/runs"
+                />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.52"
-                android:orientation="vertical"
-                android:paddingRight="50dp"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/Total_Cal"
-                    android:textSize="@dimen/label" />
-
-                <View
-                    android:layout_width="91dp"
-                    android:layout_height="5dp"
-                    android:background="@color/colorAccent" />
-
-                <TextView
-                    android:id="@+id/total_cal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/value"
-                    android:textSize="25dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="30dp">
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Total_time"
-                    android:textSize="@dimen/label"
-                    android:layout_gravity="center"/>
-                <View
-                    android:layout_width="84dp"
-                    android:layout_height="5dp"
-                    android:background="@color/colorAccent"/>
-
-                <TextView
-                    android:id="@+id/total_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/value"
-                    android:textSize="25dp"
-                    android:layout_gravity="center"
-                    />
-
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
 
 
 </LinearLayout>
