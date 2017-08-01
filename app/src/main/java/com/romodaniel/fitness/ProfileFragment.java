@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment  {
 
                     totalRuns.setText("0");
                     totalMiles.setText("0");
-                    totalCal.setText(String.format(Locale.US, "%.2f", 0));
+                    totalCal.setText(String.format(Locale.US, "%.2f", 0.0));
                     totalTime.setText(String.format(Locale.US, "%02d:%02d:%02d", 0, 0, 0));
                 }else if (spinner.getItemAtPosition(position).toString().equals("Total")){
 
