@@ -15,12 +15,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.romodaniel.fitness.Utilities.MyAdapter;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class TrackerFragment extends Fragment implements AdapterView.OnItemSelectedListener, MyAdapter.ItemClickListener {
+public class TrackerFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private TextView date;
     private Button addButton;
@@ -93,11 +91,6 @@ public class TrackerFragment extends Fragment implements AdapterView.OnItemSelec
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-    @Override
-    public void onItemClick(Cursor cursor, int clickedItemIndex) {
-        cursor.moveToPosition(clickedItemIndex);
-        Log.d(TAG, String.format("Item clicked # ", clickedItemIndex));
-    }
+    
 
 }
