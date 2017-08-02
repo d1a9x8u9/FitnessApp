@@ -75,7 +75,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
         public void bind(int pos){
             FoodItems repo = data.get(pos);
             foodname.setText(repo.getItem_name());
-            foodcalorie.setText(repo.getCalories());
+            foodcalorie.setText(Math.round(Double.parseDouble(repo.getCalories()))+"");
         }
 
         @Override
