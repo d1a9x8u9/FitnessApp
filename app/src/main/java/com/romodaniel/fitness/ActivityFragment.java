@@ -75,6 +75,8 @@ public class ActivityFragment extends Fragment {
             totalRuns.setText("0");
         }
 
+        final GoogleMapsFragment googleMapsFragment = new GoogleMapsFragment();
+        googleMapsFragment.enableMyLocation(getActivity());
 
         startRun.setOnClickListener(new View.OnClickListener() {
             // once the image is clicked get the google maps fragment where the user can start run
@@ -85,7 +87,7 @@ public class ActivityFragment extends Fragment {
 
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_activity, new GoogleMapsFragment())
+                        .replace(R.id.fragment_activity, googleMapsFragment)
                         .commit();
 
             }

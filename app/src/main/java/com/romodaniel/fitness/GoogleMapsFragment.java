@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -95,9 +96,9 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
     };
 
     // prompt the user to enable their location if its not already enabled
-    private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[] {
+    public void enableMyLocation(FragmentActivity activity) {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, new String[] {
                     Manifest.permission.ACCESS_FINE_LOCATION
             }, 1);
         } else if (mGoogleMap != null) {
@@ -115,6 +116,10 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
                 }
             }
         }
+    }
+
+    private void enableMyLocation() {
+        enableMyLocation(getActivity());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -324,10 +329,7 @@ public class GoogleMapsFragment extends Fragment implements LocationListener, On
 
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
+
 
 
 }

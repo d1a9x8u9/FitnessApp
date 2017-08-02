@@ -137,15 +137,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         findViewById(R.id.main).setVisibility(View.GONE);
 
-
-        if (id == R.id.nav_profile) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.contentMain, new ProfileFragment())
-                    .addToBackStack(null)
-                    .commit();
-        }
-        else if (id == R.id.nav_tracker) {
+//
+//        if (id == R.id.nav_profile) {
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.contentMain, new ProfileFragment())
+//                    .addToBackStack(null)
+//                    .commit();
+//        }
+         if (id == R.id.nav_tracker) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.contentMain, new TrackerFragment())
