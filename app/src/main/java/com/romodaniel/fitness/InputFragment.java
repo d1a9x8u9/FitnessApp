@@ -81,16 +81,7 @@ public class InputFragment extends Fragment {
             }
         });
 
-        searchButton.setOnClickListener( new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                fm.beginTransaction()
-                        .replace(R.id.contentMain, new SearchFragment())
-                        .commit();
-            }
-        });
 
         button0.setOnClickListener( new View.OnClickListener(){
 
@@ -228,7 +219,19 @@ public class InputFragment extends Fragment {
         });
 
 
+        searchButton.setOnClickListener( new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                SearchFragment sf = new SearchFragment();
+                sf.setDate(date);
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction()
+                        .replace(R.id.contentMain, sf)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
 
 
@@ -289,5 +292,4 @@ public class InputFragment extends Fragment {
     public void setDate(String date){
         this.date = date;
     }
-
 }

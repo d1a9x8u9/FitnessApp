@@ -1,13 +1,18 @@
 package com.romodaniel.fitness.Utilities;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.romodaniel.fitness.R;
+import com.romodaniel.fitness.TrackerFragment;
+import com.romodaniel.fitness.data.CalDbUtils;
+import com.romodaniel.fitness.data.Cal_Record;
 
 import java.util.ArrayList;
 
@@ -19,11 +24,14 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
 
     private ArrayList<FoodItems> data;
     ItemClickListener listener;
+    String date;
+    //Context c;
 
 
-    public FoodItemAdapter(ArrayList<FoodItems> data, ItemClickListener listener){
+    public FoodItemAdapter(ArrayList<FoodItems> data, String date, ItemClickListener listener){
         this.data = data;
         this.listener = listener;
+        this.date = date;
     }
 
     public interface ItemClickListener {
@@ -67,13 +75,19 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
         public void bind(int pos){
             FoodItems repo = data.get(pos);
             foodname.setText(repo.getItem_name());
-            foodcalorie.setText(repo.getCalories().concat(" cal"));
+            foodcalorie.setText(repo.getCalories());
         }
 
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
             listener.onItemClick(pos);
+
+            SQLiteDatabase db = TrackerFragment.getdb();
+            Cal_Record cr = new Cal_Record(Integer.parseInt(foodcalorie.getText().toString()),date, foodcalorie.getText().toString());
+            CalDbUtils.InsertToDb(db,cr);
+
+            Toast.makeText(v.getContext(), "Added " + foodcalorie.getText().toString() + " calories from " + foodname.getText().toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
