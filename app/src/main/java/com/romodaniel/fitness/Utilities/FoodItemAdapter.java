@@ -75,16 +75,18 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.ItemHo
         public void bind(int pos){
             FoodItems repo = data.get(pos);
             foodname.setText(repo.getItem_name());
-            foodcalorie.setText(Math.round(Double.parseDouble(repo.getCalories()))+"");
+            foodcalorie.setText(Math.round(Double.parseDouble(repo.getCalories()))+" cal");
         }
 
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
             listener.onItemClick(pos);
+            String delims = " ";
+            String[] tokens = foodcalorie.getText().toString().split(delims);
 
             SQLiteDatabase db = TrackerFragment.getdb();
-            Cal_Record cr = new Cal_Record(Integer.parseInt(foodcalorie.getText().toString()),date, foodcalorie.getText().toString());
+            Cal_Record cr = new Cal_Record(Integer.parseInt(tokens[0]),date, foodcalorie.getText().toString());
             CalDbUtils.InsertToDb(db,cr);
 
             Toast.makeText(v.getContext(), "Added " + foodcalorie.getText().toString() + " calories from " + foodname.getText().toString(), Toast.LENGTH_SHORT).show();
