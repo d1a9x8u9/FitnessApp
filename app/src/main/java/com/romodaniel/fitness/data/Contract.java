@@ -17,7 +17,6 @@ public class Contract {
 
     }
 
-
     public static class TABLE_USER implements BaseColumns {
 
         public static final String TABLE_NAME = "user";

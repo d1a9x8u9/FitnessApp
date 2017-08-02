@@ -37,6 +37,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
     EditText q;
     ProgressBar progress;
     String query;
+    String date;
     private RecyclerView fooditemsrv;
 
     private final String TAG = "searchfragment";
@@ -137,7 +138,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
             super.onPostExecute(newsData);
             progress.setVisibility(View.GONE);
             if(newsData!=null){
-                FoodItemAdapter adapter = new FoodItemAdapter(newsData, new FoodItemAdapter.ItemClickListener() {
+                FoodItemAdapter adapter = new FoodItemAdapter(newsData, date, new FoodItemAdapter.ItemClickListener() {
                     @Override
                     public void onItemClick(int clickedItemIndex) {
                     }
@@ -145,5 +146,8 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
                 fooditemsrv.setAdapter(adapter);
             }
         }
+    }
+    public void setDate(String date){
+        this.date = date;
     }
 }

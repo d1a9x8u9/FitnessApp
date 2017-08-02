@@ -1,5 +1,6 @@
 package com.romodaniel.fitness;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,8 +26,9 @@ import com.romodaniel.fitness.data.Cal_Record;
 
 public class TrackerFragment extends Fragment {
 
-    private SQLiteDatabase db;
+    private static SQLiteDatabase db;
     private DBHelper helper;
+    private static Context c;
 
     CalendarView calender;
     TextView cal_screen;
@@ -41,6 +43,10 @@ public class TrackerFragment extends Fragment {
     public TrackerFragment() {
         // Required empty public constructor
     }
+    /*
+    public static void getDate() {
+        return date;
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,11 +71,15 @@ public class TrackerFragment extends Fragment {
 
         date = "" + year +'-' + month + '-' + day;
 
+        c = getContext();
+
         Log.d("cdate", date);
 
 
         helper = new DBHelper(getActivity());
         db = helper.getWritableDatabase();
+
+
 
         Cursor calCursor = CalDbUtils.getAll(db);
         if(calCursor.moveToFirst()) {
@@ -134,6 +144,14 @@ public class TrackerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+    }
+    /*
+    private Context getContext() {
+        return c;
+    }*/
+
+    public static SQLiteDatabase getdb(){
+        return db;
     }
 
 }

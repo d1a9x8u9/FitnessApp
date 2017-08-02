@@ -52,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 Contract.TABLE_EATS.COLUMN_NAME_DESC + " TEXT NOT NULL, " +
                 Contract.TABLE_EATS.COLUMN_NAME_VALUE + " INTEGER NOT NULL); ";
 
+
         Log.d(TAG, "Create table SQL: " + queryString3);
         db.execSQL(queryString3);
 
