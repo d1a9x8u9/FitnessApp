@@ -22,7 +22,7 @@
             android:layout_gravity="center"/>
 
         <View
-            android:layout_width="80dp"
+            android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@color/colorAccent" />
@@ -45,7 +45,7 @@
             android:textSize="@dimen/label" />
 
         <View
-            android:layout_width="85dp"
+            android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@color/colorAccent" />
@@ -77,7 +77,7 @@
             android:textSize="@dimen/label" />
 
         <View
-            android:layout_width="91dp"
+            android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@color/colorAccent" />
@@ -98,7 +98,7 @@
             android:textSize="@dimen/label"
             android:layout_gravity="center"/>
         <View
-            android:layout_width="84dp"
+            android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_gravity="center"
             android:background="@color/colorAccent"/>

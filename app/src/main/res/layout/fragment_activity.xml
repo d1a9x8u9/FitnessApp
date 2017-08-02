@@ -20,16 +20,16 @@
                 android:layout_width="256dp"
                 android:layout_height="220dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/start" />
+                app:srcCompat="@drawable/start"
+                android:layout_marginTop="15dp"/>
 
-            <TextView
-                android:id="@+id/textView"
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/total"
-                android:textSize="@dimen/label"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="25dp"
+                />
 
             <include
                 layout="@layout/runs"

@@ -5,6 +5,6 @@ package com.romodaniel.fitness.data;
  */
 
 public enum history {
-    Total,
-    Last
+    Last,
+    Total
 }
